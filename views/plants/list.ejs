@@ -1,0 +1,71 @@
+<%- include('../partials/header') %>
+
+<p>create list in this page</p>
+
+<!-- logout feature -->
+<!-- <a href="/logout">LOG OUT</a> -->
+
+
+<% if (user) { %>
+    <a href="/logout">LOG OUT</a>
+  <% } else { %>
+    <a href="/auth/google" class="login">LOG IN&nbsp;</a>
+  <% } %>
+
+
+<br>
+<br>
+<!-- add a new plant to the list-->
+<form id="plantForm" action="/<%= user.name.split(" ")[0] %>/new" method="POST">
+    <label>Name:</label>
+    <input type="text" name="name">
+    <label>Location:</label>
+    <input type="text" name="location">
+    <label>Price:</label>
+    <input type="text" name="price">
+    <label>Date:</label>
+    <input type="date" name="date" >
+    <input type="submit" value="Add Plant">
+  </form>
+
+
+
+<!-- show the list -->
+
+<table id="list">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Bought from</th>
+        <th>Price</th>
+        <th>Date</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% plants.forEach(function(p) { %>
+        <% const options = { day: 'numeric', month: 'short', year: 'numeric' } %>
+        <tr>
+          <td><%= p.name %></td>
+          <td><%= p.location %></td>
+          <td>$<%= p.price.toFixed(2) %></td>
+          <td><%= p.date.toLocaleDateString('en-US', options) %></td>
+          <td><a href="/<%= user.name.split(" ")[0] %>/<%= p._id%>">Details</a></td>
+          <td>
+            <% if(user?._id.equals(p.user)){ %>
+                <form action="/<%= user.name.split(" ")[0] %>/<%= p._id%>/delete"?_method=DELETE method="POST">
+                  <button type="submit">X</button>
+                </form>
+            <% }%>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+
+
+
+
+
+<%- include('../partials/footer') %></input>

@@ -1,0 +1,13 @@
+<%- include('./partials/header') %>
+<p>Short introduction about this app</p>
+
+<!-- login/logout feature -->
+    <% if (user) { %>
+      <a href="/logout">LOG OUT</a>
+    <% } else { %>
+      <a href="/auth/google" class="login">LOG IN&nbsp;</a>
+    <% } %>
+
+
+
+<%- include('./partials/footer') %></input>

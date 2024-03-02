@@ -1,0 +1,44 @@
+<%- include('../partials/header') %>
+
+<!-- logout feature -->
+<% if (user) { %>
+    <a href="/logout">LOG OUT</a>
+  <% } else { %>
+    <a href="/auth/google" class="login">LOG IN&nbsp;</a>
+  <% } %>
+
+  <!-- back to home page -->
+  <a href="/<%= user.name.split(" ")[0] %>">Home Page</a>
+
+
+<form action="/<%= user.name.split(" ")[0] %>/detail" method='POST' >
+<label>Light</label>
+<select name="light" id="light">
+    <option value="low-moderate">low-moderate</option>
+    <option value="bright">bright</option>
+    <option value="indirect">indirect</option>
+    <option value="direct">direct</option>
+</select>
+
+<label>Water</label>
+<select name="water" id="water">
+    <option value="low">low</option>
+    <option value="low-moderat">low-moderat</option>
+    <option value="moderate">moderate</option>
+    <option value="moderate-high">moderate-high</option>
+    <option value="high">high</option>
+    <option value="misting">misting</option>
+</select>
+
+<label>Soil</label>
+<select name="soil" id="soil">
+    <option value="well-draining">well-draining</option>
+    <option value="moisture-retaining">moisture-retaining</option>
+    <option value="sandy">sandy</option>
+    <option value="none">none</option>
+</select>
+
+<input type="submit" value="Create Detail">
+</form>
+
+

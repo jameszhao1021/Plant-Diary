@@ -1,0 +1,120 @@
+<%- include('../partials/header') %>
+
+
+<% if (user) { %>
+    <a href="/logout">LOG OUT</a>
+  <% } else { %>
+    <a href="/auth/google" class="login">LOG IN&nbsp;</a>
+  <% } %>
+
+<button type="button" id="add_data">Add</button>
+
+<table class="table table-striped"id="sample_data">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Bought from</th>
+        <th>Price</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+     
+    </tbody>
+</table>
+
+
+ <div class="modal" tabindex="1" id="action_modal">
+    <div class="modal-diaglo">
+       <div class="modal-content">
+           <form method="post">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" name="name" id="name" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Bought from</label>
+                    <input type="text" name="location" id="location" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Price</label>
+                    <input type="text" name="price" id="price" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Date</label>
+                    <input type="date" name="date" id="date" class="form-control">
+
+                </div> 
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="id" id="id">
+                <input type="hidden" name="action" id="action" value="Add">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" id="action_button">Add</button>
+            </div>
+            </form>
+       </div>
+    </div>
+</div> 
+
+<%- include('../partials/footer') %>
+
+<script>
+
+$(document).ready(function(){
+    load_data();
+    function load_data(){
+        $.ajax({
+            url:'http://localhost:3000/<%= user.name.split(" ")[0] %>',
+            method:'POST',
+            data:{action:'fetch'},
+            dataType:'JSON',
+            success:function(data){
+                var html = '';
+                if(data.data.length>0)
+                {
+                    for (var count = 0; count < data.data.length; count ++)
+                    {
+                        html += `
+                          <tr>
+                             <td>${data.data[count].name}</td>
+                             <td>${data.data[count].location}</td>
+                             <td>${'$'+data.data[count].price}</td>
+                             <td>${formatDate(data.data[count].date)}</td>
+                             <td></td>
+                          </tr>
+                        `;
+
+                        function formatDate(dateString) {
+                             const date = new Date(dateString);
+                             const options = { day: 'numeric', month: 'short', year: 'numeric' };
+                             return date.toLocaleDateString('en-US', options);
+                       }
+                    }
+                    $('#sample_data tbody').html(html);
+                }
+            }
+        })
+
+
+        
+    }
+
+
+   
+    
+})
+</script>
+
+
+${'#add_data'}.click(function(){
+        $('#sample_form')[0].reset();
+        $('#action').val('Add');
+        $('#action_button').text('Add');
+        $('#action_modal').modal('show');
+    }); 
