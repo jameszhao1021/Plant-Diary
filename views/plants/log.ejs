@@ -1,14 +1,9 @@
 <%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
 
 <!-- logout feature -->
-<% if (user) { %>
-    <a href="/logout">LOG OUT</a>
-  <% } else { %>
-    <a href="/auth/google" class="login">LOG IN&nbsp;</a>
-  <% } %>
 
   <!-- back to home page -->
-  <a href="/<%= user.name.split(" ")[0] %>">Home Page</a>
 
 
 <form action="/<%= user.name.split(" ")[0] %>/detail" method='POST' >
@@ -40,5 +35,13 @@
 
 <input type="submit" value="Create Detail">
 </form>
-
-
+<%- include('../partials/footer') %>
+<script>
+$(document).ready(function() {
+  // Load selected background image from Local Storage and apply it
+  const selectedBackground = localStorage.getItem('selectedBackground');
+  if (selectedBackground) {
+      $('body').css('background-image', 'url(' + selectedBackground + ')');
+  }
+});
+</script>

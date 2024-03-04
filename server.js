@@ -14,7 +14,7 @@ require('./config/passport');
 
 var indexRouter = require('./routes/index');
 var plantsRouter = require('./routes/plants');
-var deleteRouter = require('./routes/delete');
+
 
 
 
@@ -49,7 +49,6 @@ app.use(function (req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/', plantsRouter);
-app.use('/', deleteRouter);
 
 
 

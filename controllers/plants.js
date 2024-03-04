@@ -7,11 +7,6 @@ function index(req,res){
 }
 
 async function show(req,res){
-    // const plants = await Plant.find({})
-
-
-    // // test ajax
-    // res.render('plants/list',{plants})
 
     res.render('plants/sample_data')
 
@@ -27,49 +22,85 @@ async function create(req,res){
 }
 
 
-async function deletehis(req, res) {
-    try {
-        const { userId, plantId } = req.params;
-
-        // Assuming you have a Plant model imported and defined
-        const plant = await Plant.findById(plantId);
-
-        // Check if the plant exists
-        if (!plant) {
-            // If the plant was not found, send a 404 response
-            return res.status(404).send('Plant not found');
-        }
-
-// Check if the user is the creator of the plant
-        if (plant.user.toString() !== req.user._id.toString()) {
-            
-            // If the user is not the creator, send a 403 forbidden response
-            return res.status(403).send('You are not authorized to delete this plant');
-        }
-
-        // If the user is authorized, delete the plant
-        const deletedPlant = await Plant.findByIdAndDelete(plantId);
-
-        // Redirect the user after successful deletion
-        res.redirect(`/${userId}`); // Redirect to user page or another appropriate page
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
-    }
-}
-
-async function fetch(req, res) {
+async function crudOperations(req, res) {
+  
     try {
         const action = req.body.action;
         if (action === 'fetch') {
+         
             // Fetch all plants from the database
-            const plants = await Plant.find().sort({ _id: -1 });
+            const plants = await Plant.find().sort({date: -1 });
 
             // Send the fetched plants as JSON response
             res.json({ data: plants });
-        } else {
-            // Handle invalid action
-            res.status(400).json({ error: 'Invalid action' });
+        } 
+        if (action === 'Add'){
+             var name = req.body.name;
+             var location = req.body.location;
+             var price = req.body.price;
+             var date = req.body.date;
+             req.body.user = req.user._id;
+             var user = req.body.user;
+             var userName = req.body.userName;
+             var userAvatar = req.body.userAvatar;
+             const newPlant = new Plant({
+                name, location,price, date, user ,userName, userAvatar
+             })
+             await newPlant.save();
+             res.status(201).json({ message: 'Plant added successfully' });
+        }
+        if (action === 'delete') {
+            console.log(req.body.id);
+            const id = req.body.id;
+        
+            
+                // Find the plant by its ID and delete it
+                const deletedPlant = await Plant.findByIdAndDelete(id);
+        
+                // Check if the plant was found and deleted
+                if (!deletedPlant) {
+                    return res.status(404).json({ error: 'Plant not found' });
+                }
+        
+                // Check if the user is authorized to delete the plant
+                if (deletedPlant.user.toString() !== req.user._id.toString()) {
+                    return res.status(403).json({ error: 'You are not authorized to delete this plant' });
+                }
+        
+                // Send a success response
+                res.json({ message: 'Plant deleted successfully' });
+           
+        }
+        if (action === 'Edit') {
+         
+                // Extract data from the request body
+                const id = req.body.id;
+                console.log(id)
+                console.log(req.body);
+                const existingPlant = await Plant.findById(id);
+                console.log(existingPlant);
+              console.log(typeof(req.body.price))
+                const updatedData = {
+                    // Check if each field has been edited, if not, keep the existing value
+                    name: req.body.name.length !== 0?req.body.name : existingPlant.name,
+                    location: req.body.location.length !== 0? req.body.location : existingPlant.location,
+                    price: req.body.price.length !== 0? req.body.price : existingPlant.price,
+                    date: req.body.date.length !== 0? req.body.date : existingPlant.date,
+                    // Add other fields as needed
+                };        
+               console.log(updatedData)
+                // Find the plant by its ID and update it with the new data
+                const updatedPlant = await Plant.findByIdAndUpdate(id, updatedData, { new: true });
+        
+                // // Check if the plant was found and updated
+                if (!updatedPlant) {
+                    return res.status(404).json({ error: 'Plant not found' });
+                }
+                
+                // // Send a success response with the updated plant
+                res.status(200).json({ message: 'Plant updated successfully', updatedPlant: updatedPlant });
+
+           
         }
     } catch (error) {
         // Handle any errors that occur during database query or processing
@@ -82,6 +113,6 @@ module.exports = {
     index,
     show,
     create,
-    delete: deletehis,
-    fetch,
+   
+    crudOperations,
 }

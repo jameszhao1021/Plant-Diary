@@ -1,8 +1,128 @@
+*{
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: rgba(15, 195, 30, 0.227);
+  background-image: url('../images/backgroundImg1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-position: center;
+  background-attachment: fixed;
 }
 
+.modal-body .img-thumbnail {
+  width: 150px; /* Set the desired width */
+  height: 80px; /* Set the desired height */
+}
+
+.modal-body.backgroundBody{
+  overflow-y: auto;
+  min-height: 150px;
+  max-height: calc(100vh - 720px); /* Adjust 200px to match your modal header and footer heights */
+}
 a {
   color: #00B7FF;
+}
+
+.dataPart {
+  width: 20%; /* Set the width of each td to 20% (adjust as needed) */
+}
+.column-width {
+  width: 20%; /* Adjust the width as per your requirement */
+}
+
+
+.editDateInput{
+  padding-left:5px;
+  padding-right:0;
+}
+
+.listTd>button{
+  padding-left:3px;
+  padding-right:3px;
+  
+}
+
+table{
+  max-width: 1500px;
+  opacity: 0.9;
+}
+
+.navbar{
+  opacity: 0.9;
+}
+
+#change_background{
+  columns: #fff;
+  background-color: transparent;
+
+}
+
+.nav-item{
+  padding-left: 10px;
+}
+
+#add_data{
+  background-color: white;
+  opacity: 0.9;
+  padding:2px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+footer{
+  opacity:0.9;
+  max-height: 20vh;
+}
+
+.footerSubClass{
+  
+  width:30%;
+  text-align: justify;
+}
+
+@media (max-width: 770px) {
+  /* CSS rules to apply when window width is less than 770px */
+  /* For example, you can adjust font sizes, margins, padding, etc. */
+  .footerSubClass {
+    width:50%;
+  }
+
+}
+
+@media (max-width: 566px) {
+  /* CSS rules to apply when window width is less than 770px */
+  /* For example, you can adjust font sizes, margins, padding, etc. */
+   body{
+    padding-left:20px;
+    padding-right:20px;
+   }
+   input[type="date"] {
+    width:100px;
+   }
+}
+
+@media (max-width: 445px) {
+  /* CSS rules to apply when window width is less than 770px */
+  /* For example, you can adjust font sizes, margins, padding, etc. */
+  footer {
+    display: none;
+
+  }
+   .container.mainList{
+    width:100%;
+    padding:0;
+   }
+   body{
+    padding-left:0;
+    padding-right:0;
+   }
+   input[type="date"] {
+    width:50px;
+   }
 }
