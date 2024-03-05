@@ -3,43 +3,7 @@
 <!-- background modal -->
 <%- include('../modals/background') %>
 
-<!-- logout feature -->
-
-  <!-- back to home page -->
-
-
-<!-- <form action="/<%= user.name.split(" ")[0] %>/detail" method='POST' >
-<label>Light</label>
-<select name="light" id="light">
-    <option value="low-moderate">low-moderate</option>
-    <option value="bright">bright</option>
-    <option value="indirect">indirect</option>
-    <option value="direct">direct</option>
-</select>
-
-<label>Water</label>
-<select name="water" id="water">
-    <option value="low">low</option>
-    <option value="low-moderat">low-moderat</option>
-    <option value="moderate">moderate</option>
-    <option value="moderate-high">moderate-high</option>
-    <option value="high">high</option>
-    <option value="misting">misting</option>
-</select>
-
-<label>Soil</label>
-<select name="soil" id="soil">
-    <option value="well-draining">well-draining</option>
-    <option value="moisture-retaining">moisture-retaining</option>
-    <option value="sandy">sandy</option>
-    <option value="none">none</option>
-</select>
-
-<input type="submit" value="Create Detail">
-</form> -->
-
-
-
+<h1><%= selectedPlant._id %></h1>
 <div class='container detialList'>
   <div class='row justify-content-center'>
       <div class='col-lg-8'>
@@ -48,7 +12,7 @@
               <img src='/images/addIcon.png' width='30px' alt='add'>
           </button>
     
-          <button type='button' id='delete_data' class='btn btn-sm float-end' >
+          <button type='button' id='delete_data' class='btn btn-sm float-end' data-bs-toggle='modal', data-bs-target='#deleteModal'>
             <img src='/images/deleteIcon.png' width='30px' alt="delete">
         </button>
         <button type='button' id='edit_data' class='btn btn-sm float-end' >
@@ -125,6 +89,28 @@
   </div>
 </div> 
 
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete this detail?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="confirmDelete">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
 <%- include('../partials/footer') %>
 
 
@@ -134,7 +120,6 @@ $(document).ready(function() {
     load_data()
   // Load selected background image from Local Storage and apply it
   
-
 const selectedBackground = localStorage.getItem('selectedBackground');
      if (selectedBackground) {
         $('body').css('background-image', `url(${selectedBackground} )`);
@@ -146,8 +131,6 @@ const selectedBackground = localStorage.getItem('selectedBackground');
        localStorage.setItem('selectedBackground', imgUrl);
        $('#backgroundModal').modal('hide'); // Close modal after selecting image
     });
-
-
 
   // load data for detail
 
@@ -228,8 +211,6 @@ const selectedBackground = localStorage.getItem('selectedBackground');
    
             e.preventDefault();
             let formData = $('#sample_form').serialize();
-            //  formData += `&plant_id=${$('#plant_id').val()}`; 
-            // formData += `&selectedPlantId=${selectedPlantId}`; 
             console.log(formData);
           
             $.ajax({
@@ -249,99 +230,28 @@ const selectedBackground = localStorage.getItem('selectedBackground');
         })
     })
   
+//delete detail
+
+
+
+    $('#confirmDelete').on('click', function(){
+        const selectedPlantId = '<%= selectedPlant.id %>';
+       
+    // Perform AJAX request to delete the item
+     
+    $.ajax({
+        url: `/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
+        method: 'POST',
+        data: { action: 'delete', selectedPlantId: selectedPlantId },
+        dataType: 'json',
+        success: function(response) {
+                load_data()
+        },  
+    });
+    })
+
 })
-// $(document).ready(function() {
-//     const currentUrl = window.location.href;
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const plantId = urlParams.get('plantId');
 
-//     // Load selected background image from Local Storage and apply it
-//     const selectedBackground = localStorage.getItem('selectedBackground');
-//     if (selectedBackground) {
-//         $('body').css('background-image', `url(${selectedBackground})`);
-//     }
-//     $('.bg-btn').click(function() {
-//         var imgUrl = $(this).data('img');
-//         console.log('hi;' + imgUrl)
-//         $('body').css('background-image', 'url(' + imgUrl + ')');
-//         localStorage.setItem('selectedBackground', imgUrl);
-//         $('#backgroundModal').modal('hide'); // Close modal after selecting image
-//     });
-
-//     // Load data for detail
-//     function load_data(plantId) {
-//         $.ajax({
-//             url: currentUrl,
-//             method: 'POST',
-//             data: { action: 'fetch', plant_id: plantId },
-//             dataType: 'JSON',
-//             success: function(data) {
-//                 let html = '';
-//                 for (let count = 0; count < data.data.length; count++) {
-//                     html += `
-//                         <tr>
-//                             <td class="align-middle dataPart listTd">
-//                                 <span class="dateSpan">${data.data[count].light}</span>
-//                             </td>
-//                             <td class="align-middle dataPart listTd">
-//                                 <span class="dateSpan">${data.data[count].water}</span>
-//                             </td>
-//                             <td class="align-middle dataPart listTd">
-//                                 <span class="dateSpan">${data.data[count].soil}</span>
-//                             </td>
-//                         </tr>
-//                     `;
-//                 }
-//                 $('#sample_data tbody').html(html);
-
-//                 // Check if data is not empty to hide/show buttons
-//                 if (data.data.length > 0) {
-//                     $('#add_data').hide();
-//                     $('#edit_data').show();
-//                     $('#delete_data').show();
-//                 } else {
-//                     $('#add_data').show();
-//                     $('#edit_data').hide();
-//                     $('#delete_data').hide();
-//                 }
-//             }
-//         });
-//     }
-
-//     // Add data
-//     $('#add_data').click(function() {
-//         $('#sample_form')[0].reset();
-//         $('#action').val('Add');
-//         $('#action_button').text('Add');
-//         $('#action_modal').modal('show');
-//     });
-
-//     $('#sample_form').on('submit', function(e) {
-//         e.preventDefault();
-//         const formData = $('#sample_form').serializeArray().reduce((obj, item) => ({...obj, [item.name]: item.value}), {});
-//         formData.plant_id = plantId;
-//         console.log(formData);
-//         $.ajax({
-//             url: currentUrl,
-//             method: 'POST',
-//             data: formData,
-//             dataType: 'JSON',
-//             beforeSend: function() {
-//                 $('#action_button').attr('disabled', 'disabled');
-//             },
-//             success: function(data) {
-//                 $('#action_button').attr('disabled', false);
-//                 $('#action_modal').modal('hide');
-//                 load_data(plantId); // Reload data for the current plant
-//             }
-//         });
-//     });
-
-//     // Initial load of data
-//     load_data(plantId);
-
-//     console.log(currentUrl);
-// });
 
 </script>
 
