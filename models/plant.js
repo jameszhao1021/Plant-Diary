@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
-
+const detailSchema = require('./detail')
 
 const plantSchema = new Schema({
     name: {
@@ -28,7 +28,7 @@ const plantSchema = new Schema({
         required: true
       },
       userName: String,
-      userAvatar: String
+      userAvatar: String,
 }, {
     timestamps: true
 })

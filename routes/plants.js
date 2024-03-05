@@ -8,7 +8,9 @@ const ensureLoggedIn = require('../config/ensureLoggedIn');
 
 router.get('/user', ensureLoggedIn, plantsController.index);
 router.get('/:id', ensureLoggedIn, plantsController.show);
-router.get(`/:userId/:plantId`, ensureLoggedIn, detailsController.show);
+router.get('/:userId/:plantId', ensureLoggedIn, detailsController.show);
+router.post('/:userId/:plantId', ensureLoggedIn, detailsController.crudOperations)
 router.post('/:id', ensureLoggedIn, plantsController.crudOperations)
+
 
 module.exports = router;

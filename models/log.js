@@ -37,7 +37,8 @@ const logSchema = new Schema({
     },
     plant: {
         type: Schema.Types.ObjectId,
-        ref:'Plant'
+        ref:'Plant',
+        required: true
     },
 },{
     timestamps: true

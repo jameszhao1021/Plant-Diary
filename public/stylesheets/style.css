@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 *{
   padding:0;
   margin:0;
@@ -22,13 +24,13 @@ body {
 
 .modal-body.backgroundBody{
   overflow-y: auto;
-  min-height: 150px;
-  max-height: calc(100vh - 720px); /* Adjust 200px to match your modal header and footer heights */
+  min-height: 200px;
+  max-height: 20vh; /* Adjust 200px to match your modal header and footer heights */
 }
-a {
-  color: #00B7FF;
-}
-
+/* .container.mainList{
+  margin: 0;
+  width:2500px;
+} */
 .dataPart {
   width: 20%; /* Set the width of each td to 20% (adjust as needed) */
 }
@@ -49,12 +51,15 @@ a {
 }
 
 table{
-  max-width: 1500px;
+  width:100%;
   opacity: 0.9;
+  font-size: 25px;
 }
+
 
 .navbar{
   opacity: 0.9;
+  font-size: 20px;
 }
 
 #change_background{
@@ -63,21 +68,31 @@ table{
 
 }
 
+.nav-link:hover {
+  transform: scale(1.1); /* Scale up to 1.2 when hovered */
+  transition: all 0.1s ease-in;
+}
+
 .nav-item{
   padding-left: 10px;
 }
 
-#add_data{
+#add_data, #edit_data, #delete_data{
   background-color: white;
   opacity: 0.9;
   padding:2px;
-  margin-top: 10px;
+  margin-top: 30px;
   margin-bottom: 5px;
+}
+
+#edit_data{
+  margin-right: 10px;
 }
 
 footer{
   opacity:0.9;
   max-height: 20vh;
+  font-size: 15px;
 }
 
 .footerSubClass{
@@ -85,6 +100,25 @@ footer{
   width:30%;
   text-align: justify;
 }
+
+
+#plantTitle{
+  font-family: "Abril Fatface", serif, Arial;
+  font-weight: 600;
+  font-style:normal;
+  font-size: 60px;
+  color: #e9e7e7; /* Fill color */
+  
+  -webkit-text-stroke: 0.8px #000; /* For Chrome, Safari, Opera */
+  text-stroke: 0.8px #000; /* Standard syntax */
+    
+
+}
+
+.container.detialList{
+   margin-top:10px;
+}
+
 
 @media (max-width: 770px) {
   /* CSS rules to apply when window width is less than 770px */
@@ -95,7 +129,7 @@ footer{
 
 }
 
-@media (max-width: 566px) {
+@media (max-width: 685px) {
   /* CSS rules to apply when window width is less than 770px */
   /* For example, you can adjust font sizes, margins, padding, etc. */
    body{
@@ -103,7 +137,19 @@ footer{
     padding-right:20px;
    }
    input[type="date"] {
-    width:100px;
+    width:70px;
+   }
+}
+
+@media (max-width: 520px) {
+  /* CSS rules to apply when window width is less than 770px */
+  /* For example, you can adjust font sizes, margins, padding, etc. */
+   body{
+    padding-left:5px;
+    padding-right:5px;
+   }
+   input[type="date"] {
+    width:50px;
    }
 }
 
