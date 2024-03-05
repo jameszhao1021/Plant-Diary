@@ -8,7 +8,7 @@ function index(req,res){
 
 async function show(req,res){
 
-    res.render('plants/sample_data')
+    res.render('plants/list')
 
 }
 

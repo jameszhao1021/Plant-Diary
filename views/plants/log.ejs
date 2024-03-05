@@ -2,8 +2,10 @@
 <%- include('../partials/navbar') %>
 <!-- background modal -->
 <%- include('../modals/background') %>
+<!-- diary modal -->
+<%- include('../modals/diary') %>
 
-<h1><%= selectedPlant._id %></h1>
+
 <div class='container detialList'>
   <div class='row justify-content-center'>
       <div class='col-lg-8'>
@@ -17,6 +19,13 @@
         </button>
         <button type='button' id='edit_data' class='btn btn-sm float-end' >
             <img src='/images/editIcon.png' width='30px' alt="edit">
+        </button>
+ 
+        <button type="button" class="btn btn-sm cancelButton float-end" style="display: none;">
+            <img src='/images/cancelIcon.jpeg' width='30px' alt="cancel" >
+        </button>
+        <button type="button" class="btn  btn-sm saveButton float-end" style="display: none;">
+            <img src='/images/confirmIcon.jpeg' width='30px' alt="confirm" >
         </button>
           <table class='table table-striped table-bordered' id='sample_data'>
               <thead class='thead-dark'>
@@ -33,6 +42,22 @@
       </div>
   </div>
 </div>
+
+
+<!-- Diary container -->
+<div class='container diaryContainer'>
+    <button type="button" class="btn btn-primary" id="addDiaryBtn" data-bs-toggle="modal" data-bs-target="#addDiaryModal">Add Diary</button>
+    <div class='row justify-content-center'>
+        <div class='col-lg-8 d-flex flex-column'>
+            <!-- Content goes here -->
+            <div class="row" id='diaryEntries'>
+
+               <!-- Add diary here -->
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- detail model -->
 <div class="modal fade" tabindex="1" id="action_modal">
@@ -147,10 +172,10 @@ const selectedBackground = localStorage.getItem('selectedBackground');
                     for (let count = 0; count < data.data.length; count ++)
                     {
                         html += `
-                          <tr>
+                          <tr id='detailRow'>
                              <td class="align-middle dataPart listTd" >     
                                 <span class="dateSpan">${data.data[count].light}</span>
-                                     <select name="light" id="light" class="form-control editDateInput" style="display: none; max-width: 100px">
+                                     <select name="light" id="light" class="form-control editDateInput" style="display: none;">
                                         <option value='dark'>dark</option>
                                         <option value='dark-moderate'>dark-moderate</option>
                                         <option value='moderate'>moderate</option>
@@ -161,7 +186,7 @@ const selectedBackground = localStorage.getItem('selectedBackground');
                              </td>
                              <td class="align-middle dataPart listTd" >
                                 <span class="dateSpan">${data.data[count].water}</span>
-                                    <select name="water" id="water" class="form-control editDateInput" style="display: none; max-width: 100px">
+                                    <select name="water" id="water" class="form-control editDateInput" style="display: none;">
                                         <option value='low'>low</option>
                                         <option value='low-moderate'>low-moderate</option>
                                         <option value='moderate'>moderate</option>
@@ -172,7 +197,7 @@ const selectedBackground = localStorage.getItem('selectedBackground');
                              </td>
                              <td class="align-middle dataPart listTd" >
                                 <span class="dateSpan">${data.data[count].soil}</span>
-                                    <select name="soil" id="soil" class="form-control editDateInput" style="display: none; max-width: 100px">
+                                    <select name="soil" id="soil" class="form-control editDateInput" style="display: none;">
                                        <option value='well-draining'>well-draining</option>
                                        <option value='moisture-retaining'>moisture-retaining</option>
                                        <option value='sandy'>sandy</option>
@@ -206,7 +231,7 @@ const selectedBackground = localStorage.getItem('selectedBackground');
             $('#action_modal').modal('show');
         }); 
 
-    $('#sample_form').on('submit', function(e){
+$('#sample_form').on('submit', function(e){
         const selectedPlantId = '<%= selectedPlant.id %>';
    
             e.preventDefault();
@@ -228,13 +253,13 @@ const selectedBackground = localStorage.getItem('selectedBackground');
                 load_data();
             }
         })
-    })
+ })
   
 //delete detail
 
 
 
-    $('#confirmDelete').on('click', function(){
+$('#confirmDelete').on('click', function(){
         const selectedPlantId = '<%= selectedPlant.id %>';
        
     // Perform AJAX request to delete the item
@@ -250,8 +275,216 @@ const selectedBackground = localStorage.getItem('selectedBackground');
     });
     })
 
-})
 
+//Edit 
+
+$(document).on('click', '#edit_data', function() {
+   
+   
+    $('#detailRow').find('.align-middle').attr('contenteditable', true);
+    // Show the input field and hide the span element
+    $('#detailRow').find('.editDateInput').each(function() {
+        let currentValue = $(this).closest('.dataPart').find('.dateSpan').text(); 
+        $(this).val(currentValue);
+    });
+    $('#delete_data, #edit_data').hide();
+    $('.saveButton, .cancelButton').show();
+    $('#detailRow').find('.editDateInput').show();
+    $('#detailRow').find('.dateSpan').hide();
+   
+    
+
+});
+
+
+    $(document).on('click', '.cancelButton', function() {
+       
+        // Revert to original values
+        $('#detailRow').find('.editDateInput').hide();
+        $('#detailRow').find('.dateSpan').show(); 
+        $('#detailRow').find('.align-middle').removeAttr('contenteditable');
+        $('#delete_data, #edit_data').show();
+        $('.saveButton, .cancelButton').hide();
+    });
+
+
+
+    $(document).on('click', '.saveButton', function() {
+        
+        const selectedPlantId = '<%= selectedPlant.id %>';
+       
+    // Gather updated data from input fields
+    let updatedData = {
+        light:  $('#detailRow').find('.editDateInput').eq(0).val(),
+        water:  $('#detailRow').find('.editDateInput').eq(1).val(),
+        soil:  $('#detailRow').find('.editDateInput').eq(2).val(),
+    };
+        
+
+    // Send AJAX request to update data
+    $.ajax({
+    url: `/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
+    method: 'POST',
+    data: {
+        action: 'Edit',
+        selectedPlantId: selectedPlantId,
+        ...updatedData
+    },
+    dataType: 'json',
+    beforeSend: function(){
+                $('.saveButton').attr('disabled','disabled')
+            },
+    success: function(response) {
+        load_data()
+        $('.saveButton').attr('disabled',false);
+        $('#detailRow').find('.editDateInput').hide();
+        $('#detailRow').find('.dateSpan').show(); 
+        $('#detailRow').find('.align-middle').removeAttr('contenteditable');
+        $('#delete_data, #edit_data').show();
+        $('.saveButton, .cancelButton').hide();
+        
+    },
+    // error: function(xhr, status, error) {
+    //     // Handle error
+    //     console.error('Error:', error);
+    // }
+});
+});
+
+
+
+//Add new diary
+
+function addDiaryEntry() {
+    // Create a new diary entry element
+    var newDiaryEntry = $('<div>').addClass('col-lg-6 mb-3');
+
+    // Construct the HTML content for the diary entry
+    newDiaryEntry.html(`
+        <!-- Diary Entry -->
+        <div class="d-flex flex-row align-items-center">
+            <!-- Date input -->
+            <div class="form-group mb-0 me-3">
+                <label for="diaryDate" class="me-1">Date:</label>
+                <input type="date" class="form-control form-control-sm" id="diaryDate">
+            </div>
+            <!-- Checkboxes for actions -->
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="waterCheckbox">
+                <label class="form-check-label" for="waterCheckbox">Water</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="mistCheckbox">
+                <label class="form-check-label" for="mistCheckbox">Mist</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="fertilizeCheckbox">
+                <label class="form-check-label" for="fertilizeCheckbox">Fertilize</label>
+            </div>
+        </div>
+
+        <!-- Textarea for diary content -->
+        <div class="form-group mt-3">
+            <label for="diaryContent">Diary Content</label>
+            <textarea class="form-control" id="diaryContent" rows="5"></textarea>
+        </div>
+    `);
+
+    // Append the new diary entry to the container
+    $('#diaryEntries').append(newDiaryEntry);
+}
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+function loadDiary(){
+    const selectedPlantId = '<%= selectedPlant.id %>';
+        $.ajax({
+            url:`/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
+            method:'POST',
+            data:{action:'fetch'},
+            dataType:'JSON',
+            success:function(data){
+                let html = '';
+                if(data.data.length>0)
+                {
+                    for (let count = 0; count < data.data.length; count ++)
+                    {
+                        html += `
+
+                        <div class="d-flex flex-row align-items-center">
+        
+                             <div class="form-group mb-0 me-3">
+                                 <label for="diaryDate" class="me-1">Date:</label>
+                                     <span class="dateSpan">${formatDate(data.data[count].date)}</span>
+                                     <input type="date" class="form-control editDateInput dateInput" name='date' style="display: none; max-width: 150px">
+                             </div>
+            
+                           <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="waterCheckbox">Water</label>
+                                <span class="dateSpan">${data.data[count].water}</span>
+                                <input class="form-check-input editDateInput dateInput" type="checkbox" id="waterCheckbox"  name='water' style="display: none;max-width: 150px">
+                                
+                           </div>
+                           <div class="form-check form-check-inline"> 
+                               <label class="form-check-label" for="mistCheckbox">Mist</label>
+                               <span class="dateSpan">${data.data[count].mist}</span>
+                                <input class="form-check-input" type="checkbox" id="mistCheckbox" editDateInput dateInput" name='mist' style="display: none;max-width: 150px">
+                           </div>
+                          <div class="form-check form-check-inline">
+                                
+                                <label class="form-check-label" for="fertilizeCheckbox">Fertilize</label>
+                                <span class="dateSpan">${data.data[count].fertilise}</span>
+                                <input class="form-check-input editDateInput dateInput" " type="checkbox" id="fertiliseCheckbox" name='fertilise' style="display: none; max-width: 150px">
+                          </div>
+
+                        </div>
+
+                          <div class="form-group mt-3">
+                          <label for="diaryContent">Diary Content</label>
+                          <span class="dateSpan">${data.data[count].content}</span>
+                               <textarea class="form-control editDateInput dateInput" id="diaryContent" rows="5"  name='content' style="display: none"></textarea>
+                         </div>
+                         <button type="button" class="btn editButton" data-item-id="${data.data[count]._id}">
+                                <img src='/images/editIcon.png' width='20px' alt="delete">
+                         </button>
+                         <button type="button" class="btn deleteButton" data-bs-toggle="modal" data-bs-target="#deleteModal" data-item-id="${data.data[count]._id}">
+                                <img src='/images/deleteIcon.png' width='20px' alt="delete">
+                         </button>
+                        <button type="button" class="btn  saveButton" style="display: none;">
+                                <img src='/images/confirmIcon.jpeg' width='20px' alt="confirm">
+                         </button>
+                         <button type="button" class="btn cancelButton" style="display: none;">
+                                <img src='/images/cancelIcon.jpeg' width='20px' alt="cancel">
+                         </button>
+
+                        `;
+
+                        function formatDate(dateString) {
+                             const date = new Date(dateString);
+                             const options = { day: 'numeric', month: 'short', year: 'numeric' };
+                             return date.toLocaleDateString('en-US', options);
+                        }
+                    }
+                }
+                $('#diaryEntries').html(html);
+            }
+        })
+    }
+
+
+
+
+})
 
 </script>
 

@@ -19,8 +19,7 @@ async function crudOperations(req, res) {
         const action = req.body.action;
         if (action === 'fetch') {
 
-            // Fetch all detail from the database
-            // const detail = await Detail.findById(req.body.selectedPlantId);
+            // Fetch corresponding detail from the database
             const detail = await Detail.find({ plant: selectedPlantId })
 
             // Send the fetched plants as JSON response
@@ -46,9 +45,7 @@ async function crudOperations(req, res) {
 
             // Find the plant by its ID that its detail will be deleted
             const deletedDetailPlant = await Plant.findById(plantId);
-            // console.log('this show the plant that detail will be deleted: '+ deletedDetailPlant)
-            // const deletedId = deletedDetailPlant.id
-            // console.log('this show the formal deleteplantId: '+ deletedId)
+            
             await Detail.findOneAndDelete({plant:plantId})
             // Check if the plant was found and deleted
             if (!plantId) {
@@ -67,31 +64,28 @@ async function crudOperations(req, res) {
         if (action === 'Edit') {
 
             // Extract data from the request body
-            const id = req.body.id;
-            console.log(id)
-            console.log(req.body);
-            const existingPlant = await Plant.findById(id);
-            console.log(existingPlant);
-            console.log(typeof (req.body.price))
+            const plantId = req.body.selectedPlantId;
+            const existingDetail = await Detail.findOne({plant:plantId})
+            console.log('current existed detail: '+existingDetail)
+            console.log('see the body when editing:', req.body)
             const updatedData = {
                 // Check if each field has been edited, if not, keep the existing value
-                name: req.body.name.length !== 0 ? req.body.name : existingPlant.name,
-                location: req.body.location.length !== 0 ? req.body.location : existingPlant.location,
-                price: req.body.price.length !== 0 ? req.body.price : existingPlant.price,
-                date: req.body.date.length !== 0 ? req.body.date : existingPlant.date,
+                light: req.body.light.length !== 0 ? req.body.light : existingDetail.light,
+                water: req.body.water.length !== 0 ? req.body.water : existingDetail.water,
+                soil: req.body.soil.length !== 0 ? req.body.soil : existingDetail.soil,
                 // Add other fields as needed
             };
             console.log(updatedData)
             // Find the plant by its ID and update it with the new data
-            const updatedPlant = await Plant.findByIdAndUpdate(id, updatedData, { new: true });
+            const updatedDetail= await Detail.findOneAndUpdate({plant:plantId}, updatedData, { new: true });
 
             // // Check if the plant was found and updated
-            if (!updatedPlant) {
-                return res.status(404).json({ error: 'Plant not found' });
+            if (!existingDetail) {
+                return res.status(404).json({ error: 'Detail not found' });
             }
 
             // // Send a success response with the updated plant
-            res.status(200).json({ message: 'Plant updated successfully', updatedPlant: updatedPlant });
+            res.status(200).json({ message: 'Plant updated successfully', updatedDetail: updatedDetail });
 
 
         }
