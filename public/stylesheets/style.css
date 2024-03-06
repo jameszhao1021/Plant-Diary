@@ -6,8 +6,7 @@
   box-sizing: border-box;
 }
 
-body {
-  padding: 50px;
+body { 
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: rgba(15, 195, 30, 0.227);
   background-image: url('../images/backgroundImg1.jpg');
@@ -15,6 +14,9 @@ body {
   background-repeat: no-repeat; 
   background-position: center;
   background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .modal-body .img-thumbnail {
@@ -94,10 +96,33 @@ table{
   opacity: 0.9;
   font-size: 25px;
 }
+
+.diaryData{
+  width: 48%;
+  
+}
+.container.outerContainer{
+  background-color: white;
+  opacity: 0.9;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  flex: 1;
+  padding:0 40px;
+  
+}
+
+.form-check-inline.diaryDataInput{
+  padding-left: 0;
+  padding-right: 5px;
+}
+
+
+
 footer{
   opacity:0.9;
   max-height: 20vh;
   font-size: 15px;
+  flex-shrink: 0;
 }
 
 .footerSubClass{
@@ -112,19 +137,28 @@ footer{
   font-weight: 600;
   font-style:normal;
   font-size: 60px;
-  color: #e9e7e7; /* Fill color */
-  
+  color: #a5d5a5; /* Fill color */
+  letter-spacing: 5px;
   -webkit-text-stroke: 0.8px #000; /* For Chrome, Safari, Opera */
   text-stroke: 0.8px #000; /* Standard syntax */
     
 
 }
 
+.container.mainList{
+  margin-top: 50px;
+  flex: 1;
+}
 .container.detialList{
    margin-top:10px;
 }
 
-
+@media (max-width: 1200px) {
+  .diaryData{
+    width: 100%;
+    
+  }
+}
 @media (max-width: 770px) {
   /* CSS rules to apply when window width is less than 770px */
   /* For example, you can adjust font sizes, margins, padding, etc. */

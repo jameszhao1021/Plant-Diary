@@ -10,8 +10,6 @@
                 <img src='/images/addIcon.png' width='30px' alt="add">
             </button>
             
-           
-
             <table class="table table-striped table-bordered" id="sample_data">
                 <thead class="thead-dark">
                     <tr>
@@ -30,10 +28,6 @@
     </div>
 </div>
 
-
-
-
-
 <%- include('../partials/footer') %>
 
 <!-- background modal -->
@@ -47,7 +41,6 @@
             <div class="modal-header">
                 <h5 class="modal-title">Add New Plant</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
             </div>
             <div class="modal-body">
                 <div class="mb-3">
@@ -65,7 +58,6 @@
                 <div class="mb-3">
                     <label class="form-label">Date</label>
                     <input type="date" name="date" id="date" class="form-control">
-
                 </div> 
             </div>
             <div class="modal-footer">
@@ -78,7 +70,6 @@
        </div>
     </div>
 </div> 
-
 
 <!-- Delete Confirmation Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -98,7 +89,6 @@
       </div>
     </div>
   </div>
-  
 
 <script>
 $(document).ready(function(){
@@ -114,7 +104,6 @@ $(document).ready(function(){
        localStorage.setItem('selectedBackground', imgUrl);
        $('#backgroundModal').modal('hide'); // Close modal after selecting image
     });
-
 
     function load_data(){
         $.ajax({
@@ -197,7 +186,6 @@ $(document).on('click', '.editButton', function() {
 
 });
 
-
     $(document).on('click', '.cancelButton', function() {
         let row = $(this).closest('tr');
         // Revert to original values
@@ -207,8 +195,6 @@ $(document).on('click', '.editButton', function() {
         row.find('.detailButton, .editButton, .deleteButton').show();
         row.find('.saveButton, .cancelButton').hide();
     });
-
-
 
     $(document).on('click', '.saveButton', function() {
         
@@ -221,10 +207,8 @@ $(document).on('click', '.editButton', function() {
         location: row.find('.editDateInput').eq(1).val(),
         price: row.find('.editDateInput').eq(2).val(),
         date: row.find('.editDateInput').eq(3).val(),
-        // Add other fields as needed
     };
         
-
     // Send AJAX request to update data
     $.ajax({
     url: 'http://localhost:3000/<%= user.name.split(" ")[0] %>',
@@ -245,24 +229,16 @@ $(document).on('click', '.editButton', function() {
         row.find('.dateSpan').show(); 
         row.find('.align-middle').removeAttr('contenteditable');
         row.find('.detailButton, .editButton, .deleteButton').show();
-        row.find('.saveButton, .cancelButton').hide();
-        
+        row.find('.saveButton, .cancelButton').hide();       
     },
-    // error: function(xhr, status, error) {
-    //     // Handle error
-    //     console.error('Error:', error);
-    // }
 });
 });
 
     // Add event listener for detail button
     $(document).on('click', '.detailButton', function() {
         let itemId = $(this).data('item-id');
-        window.location.href = `/<%= user.name.split(" ")[0] %>/${itemId}`;
-       
-      
+        window.location.href = `/<%= user.name.split(" ")[0] %>/${itemId}`;     
     });
-
 
 // add data
 
@@ -299,7 +275,6 @@ $(document).on('click', '.editButton', function() {
         let id = $(this).data('item-id'); // Extract item ID from the delete button that triggered the modal
     $('#confirmDelete').data('item-id', id); // Set the item ID in the confirmDelete button's data attribute
     });
-
 
     $('#confirmDelete').on('click', function(){
         let id = $(this).data('item-id'); // Extract item ID from the button's data attribute

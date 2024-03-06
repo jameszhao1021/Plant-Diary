@@ -95,8 +95,7 @@ async function crudOperations(req, res) {
         if (action === 'fetch') {
 
             // Fetch corresponding detail from the database
-            const diaries = await Diary.find().sort({date: -1 });
-
+            const diaries = await Diary.find({ plant: selectedPlantId }).sort({date: -1 })
             // Send the fetched plants as JSON response
             res.json({ data: diaries });
         }
@@ -121,25 +120,20 @@ async function crudOperations(req, res) {
         }
 
         if (action === 'delete') {
-            console.log('what body is passed to the back end', req.body);
-            const plantId = req.body.selectedPlantId;
-
-            // Find the plant by its ID that its detail will be deleted
-            const deletedDetailPlant = await Plant.findById(plantId);
+           
+            const id = req.body.id;
+        
             
-            await Detail.findOneAndDelete({plant:plantId})
-            // Check if the plant was found and deleted
-            if (!plantId) {
-                return res.status(404).json({ error: 'Plant not found' });
-            }
-
-            // Check if the user is authorized to delete the plant
-            if (deletedDetailPlant.user.toString() !== req.user._id.toString()) {
-                return res.status(403).json({ error: 'You are not authorized to delete this plant' });
-            }
-
-            // Send a success response
-            res.json({ message: 'Plant deleted successfully' });
+                // Find the plant by its ID and delete it
+                const deleteDiary = await Diary.findByIdAndDelete(id);
+        
+                // Check if the plant was found and deleted
+                if (!deleteDiary) {
+                    return res.status(404).json({ error: 'Diary not found' });
+                }      
+        
+                // Send a success response
+                res.json({ message: 'Diary deleted successfully' });
 
         }
         if (action === 'Edit') {
