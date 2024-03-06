@@ -89,6 +89,11 @@ table{
   margin-right: 10px;
 }
 
+.container.diaryContainer{
+  background-color: white;
+  opacity: 0.9;
+  font-size: 25px;
+}
 footer{
   opacity:0.9;
   max-height: 20vh;

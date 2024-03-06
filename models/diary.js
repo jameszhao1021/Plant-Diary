@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema;
 
-const logSchema = new Schema({
+const diarySchema = new Schema({
     date: {
         type: Date, 
         required: true,
@@ -20,7 +20,7 @@ const logSchema = new Schema({
         required: true,
         default: false,
     },
-    feritise: {
+    fertilise: {
         type: Boolean, 
         required: true,
         default: false,
@@ -31,7 +31,7 @@ const logSchema = new Schema({
         max:300,
         required: true,
     },
-    note: {
+    content: {
         type: String, 
         required: false,
     },
@@ -44,4 +44,4 @@ const logSchema = new Schema({
     timestamps: true
 })
 
-module.exports = mongoose.model('Log', logSchema)
+module.exports = mongoose.model('Diary', diarySchema)

@@ -1,177 +1,189 @@
 <%- include('../partials/header') %>
-<%- include('../partials/navbar') %>
-<!-- background modal -->
-<%- include('../modals/background') %>
-<!-- diary modal -->
-<%- include('../modals/diary') %>
+    <%- include('../partials/navbar') %>
+        <!-- background modal -->
+        <%- include('../modals/background') %>
+            <!-- diary modal -->
+            <%- include('../modals/diary') %>
 
 
-<div class='container detialList'>
-  <div class='row justify-content-center'>
-      <div class='col-lg-8'>
-        <h1 id='plantTitle' class='float-start'> <%= selectedPlant.name %></h1>
-          <button type='button' id='add_data' class='btn btn-sm float-end' data-bs-toggle='modal', data-bs-target='#action_modal'>
-              <img src='/images/addIcon.png' width='30px' alt='add'>
-          </button>
-    
-          <button type='button' id='delete_data' class='btn btn-sm float-end' data-bs-toggle='modal', data-bs-target='#deleteModal'>
-            <img src='/images/deleteIcon.png' width='30px' alt="delete">
-        </button>
-        <button type='button' id='edit_data' class='btn btn-sm float-end' >
-            <img src='/images/editIcon.png' width='30px' alt="edit">
-        </button>
- 
-        <button type="button" class="btn btn-sm cancelButton float-end" style="display: none;">
-            <img src='/images/cancelIcon.jpeg' width='30px' alt="cancel" >
-        </button>
-        <button type="button" class="btn  btn-sm saveButton float-end" style="display: none;">
-            <img src='/images/confirmIcon.jpeg' width='30px' alt="confirm" >
-        </button>
-          <table class='table table-striped table-bordered' id='sample_data'>
-              <thead class='thead-dark'>
-                  <tr>
-                      <th class='column-width'>Light</th>
-                      <th class='column-width'>Water</th>
-                      <th class='column-width'>Soil</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <!--  table data will be inserted here -->
-              </tbody>
-          </table>
-      </div>
-  </div>
-</div>
+                <div class='container detialList'>
+                    <div class='row justify-content-center'>
+                        <div class='col-lg-8'>
+                            <h1 id='plantTitle' class='float-start'>
+                                <%= selectedPlant.name %>
+                            </h1>
+                            <button type='button' id='add_data' class='btn btn-sm float-end' data-bs-toggle='modal' ,
+                                data-bs-target='#action_modal'>
+                                <img src='/images/addIcon.png' width='30px' alt='add'>
+                            </button>
+
+                            <button type='button' id='delete_data' class='btn btn-sm float-end' data-bs-toggle='modal' ,
+                                data-bs-target='#deleteModal'>
+                                <img src='/images/deleteIcon.png' width='30px' alt="delete">
+                            </button>
+                            <button type='button' id='edit_data' class='btn btn-sm float-end'>
+                                <img src='/images/editIcon.png' width='30px' alt="edit">
+                            </button>
+
+                            <button type="button" class="btn btn-sm cancelButton float-end" style="display: none;">
+                                <img src='/images/cancelIcon.jpeg' width='30px' alt="cancel">
+                            </button>
+                            <button type="button" class="btn  btn-sm saveButton float-end" style="display: none;">
+                                <img src='/images/confirmIcon.jpeg' width='30px' alt="confirm">
+                            </button>
+                            <table class='table table-striped table-bordered' id='sample_data'>
+                                <thead class='thead-dark'>
+                                    <tr>
+                                        <th class='column-width'>Light</th>
+                                        <th class='column-width'>Water</th>
+                                        <th class='column-width'>Soil</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--  table data will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
 
-<!-- Diary container -->
-<div class='container diaryContainer'>
-    <button type="button" class="btn btn-primary" id="addDiaryBtn" data-bs-toggle="modal" data-bs-target="#addDiaryModal">Add Diary</button>
-    <div class='row justify-content-center'>
-        <div class='col-lg-8 d-flex flex-column'>
-            <!-- Content goes here -->
-            <div class="row" id='diaryEntries'>
+                <!-- Diary container -->
+                <div class='container diaryContainer'>
+                    <button type="button" class="btn btn-primary" id="addDiaryBtn" data-bs-toggle="modal"
+                        data-bs-target="#addDiaryModal">Add Diary</button>
+                    <div class='row justify-content-center'>
+                        <div class='col-lg-12 d-flex flex-column'>
+                            <!-- Content goes here -->
+                            <div class="row p-2" id='diaryEntries'>
 
-               <!-- Add diary here -->
-            </div>
-        </div>
-    </div>
-</div>
+                                <!-- Add diary here -->
 
-
-<!-- detail model -->
-<div class="modal fade" tabindex="1" id="action_modal">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-     <div class="modal-content">
-         <form method="post" id="sample_form">
-          <div class="modal-header">
-              <h5 class="modal-title">Add Some Details</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-          </div>
-          <div class="modal-body">
-              <div class="mb-3">
-                  <label class="form-label">Light</label>
-                  <select name="light" id="light" class="form-control">
-                     <option value='dark'>dark</option>
-                     <option value='dark-moderate'>dark-moderate</option>
-                     <option value='moderate'>moderate</option>
-                     <option value='moderate-bright'>moderate-bright</option>
-                     <option value='bright'>bright</option>            
-                  </select>
-              </div>
-              <div class="mb-3">
-                  <label class="form-label">Water</label>
-                  <select name="water" id="water" class="form-control">
-                      <option value='low'>low</option>
-                      <option value='low-moderate'>low-moderate</option>
-                      <option value='moderate'>moderate</option>
-                      <option value='moderate-high'>moderate-high</option>
-                      <option value='high'>high</option>
-                      <option value='misting'>misting</option>
-                   </select>
-              </div>
-              <div class="mb-3">
-                  <label class="form-label">Soil</label>
-                  <select name="soil" id="soil" class="form-control">
-                      <option value='well-draining'>well-draining</option>
-                      <option value='moisture-retaining'>moisture-retaining</option>
-                      <option value='sandy'>sandy</option>
-                      <option value='mnone'>none</option>
-                 </select>
-              </div>
-          </div>
-          <div class="modal-footer">
-              <input type="hidden" name="id" id="id">
-              <input type="hidden" name="plantId" id="plantId" value="<%= selectedPlant.id %>">
-
-              <input type="hidden" name="action" id="action" value="Add">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
-              <button type="submit" class="btn btn-primary" id="action_button">Add Detials</button>
-          </div>
-          </form>
-     </div>
-  </div>
-</div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
-<!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Are you sure you want to delete this detail?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="confirmDelete">Delete</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+                <!-- detail model -->
+                <div class="modal fade" tabindex="1" id="action_modal">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <form method="post" id="sample_form">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Add Some Details</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Light</label>
+                                        <select name="light" id="light" class="form-control">
+                                            <option value='dark'>dark</option>
+                                            <option value='dark-moderate'>dark-moderate</option>
+                                            <option value='moderate'>moderate</option>
+                                            <option value='moderate-bright'>moderate-bright</option>
+                                            <option value='bright'>bright</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Water</label>
+                                        <select name="water" id="water" class="form-control">
+                                            <option value='low'>low</option>
+                                            <option value='low-moderate'>low-moderate</option>
+                                            <option value='moderate'>moderate</option>
+                                            <option value='moderate-high'>moderate-high</option>
+                                            <option value='high'>high</option>
+                                            <option value='misting'>misting</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Soil</label>
+                                        <select name="soil" id="soil" class="form-control">
+                                            <option value='well-draining'>well-draining</option>
+                                            <option value='moisture-retaining'>moisture-retaining</option>
+                                            <option value='sandy'>sandy</option>
+                                            <option value='mnone'>none</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" name="id" id="id">
+                                    <input type="hidden" name="plantId" id="plantId" value="<%= selectedPlant.id %>">
+
+                                    <input type="hidden" name="action" id="action" value="Add">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary" id="action_button">Add
+                                        Detials</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
 
-<%- include('../partials/footer') %>
+                <!-- Delete Confirmation Modal -->
+                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete this detail?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                    id="confirmDelete">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
-<script>
-$(document).ready(function() {
-    
-    load_data()
-  // Load selected background image from Local Storage and apply it
-  
-const selectedBackground = localStorage.getItem('selectedBackground');
-     if (selectedBackground) {
-        $('body').css('background-image', `url(${selectedBackground} )`);
-     }
-    $('.bg-btn').click(function() {
-       var imgUrl = $(this).data('img');
-       console.log('hi;' + imgUrl)
-       $('body').css('background-image', 'url(' +imgUrl+ ')');
-       localStorage.setItem('selectedBackground', imgUrl);
-       $('#backgroundModal').modal('hide'); // Close modal after selecting image
-    });
 
-  // load data for detail
+                <%- include('../partials/footer') %>
 
-  function load_data(){
-    const selectedPlantId = '<%= selectedPlant.id %>';
-   
-        $.ajax({
-            url:`/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
-            method:'POST',
-            data:{action:'fetch'},
-            dataType:'JSON',
-            success:function(data){
-                let html = '';                
-                    for (let count = 0; count < data.data.length; count ++)
-                    {
-                        html += `
+
+                    <script>
+                        $(document).ready(function () {
+
+                            load_data();
+                            loadDiary();
+                            // Load selected background image from Local Storage and apply it
+
+                            const selectedBackground = localStorage.getItem('selectedBackground');
+                            if (selectedBackground) {
+                                $('body').css('background-image', `url(${selectedBackground} )`);
+                            }
+                            $('.bg-btn').click(function () {
+                                var imgUrl = $(this).data('img');
+                                console.log('hi;' + imgUrl)
+                                $('body').css('background-image', 'url(' + imgUrl + ')');
+                                localStorage.setItem('selectedBackground', imgUrl);
+                                $('#backgroundModal').modal('hide'); // Close modal after selecting image
+                            });
+
+                            // load data for detail
+
+                            function load_data() {
+                                const selectedPlantId = '<%= selectedPlant.id %>';
+
+                                $.ajax({
+                                    url: `/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
+                                    method: 'POST',
+                                    data: { action: 'fetch', part: 'detail' },
+                                    dataType: 'JSON',
+                                    success: function (data) {
+                                        let html = '';
+                                        for (let count = 0; count < data.data.length; count++) {
+                                            html += `
                           <tr id='detailRow'>
                              <td class="align-middle dataPart listTd" >     
                                 <span class="dateSpan">${data.data[count].light}</span>
@@ -206,285 +218,341 @@ const selectedBackground = localStorage.getItem('selectedBackground');
                                 </td>                            
                           </tr>
                         `;
-                    }
-                
-                $('#sample_data tbody').html(html);
-                if (data.data.length > 0) {
-                    $('#add_data').hide();
-                    $('#edit_data').show();
-                    $('#delete_data').show();
-                } else {
-                    $('#add_data').show();
-                    $('#edit_data').hide();
-                    $('#delete_data').hide();
-                }
-            }
-        })
-    }
+                                        }
 
- //Add data
- $('#add_data').click(function(){
-    
-            $('#sample_form')[0].reset();
-            $('#action').val('Add');
-            $('#action_button').text('Add');  
-            $('#action_modal').modal('show');
-        }); 
+                                        $('#sample_data tbody').html(html);
+                                        if (data.data.length > 0) {
+                                            $('#add_data').hide();
+                                            $('#edit_data').show();
+                                            $('#delete_data').show();
+                                        } else {
+                                            $('#add_data').show();
+                                            $('#edit_data').hide();
+                                            $('#delete_data').hide();
+                                        }
+                                    }
+                                })
+                            }
 
-$('#sample_form').on('submit', function(e){
-        const selectedPlantId = '<%= selectedPlant.id %>';
-   
-            e.preventDefault();
-            let formData = $('#sample_form').serialize();
-            console.log(formData);
-          
-            $.ajax({
-            url: `/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
-            method:'POST',
-            data:formData,
-            
-            dataType:'JSON',
-            beforeSend: function(){
-                $('#action_button').attr('disabled','disabled')
-            },
-            success:function(data){
-                $('#action_button').attr('disabled',false);
-                $('#action_modal').modal('hide'); 
-                load_data();
-            }
-        })
- })
-  
-//delete detail
+                            //Add data
+                            $('#add_data').click(function () {
 
+                                $('#sample_form')[0].reset();
+                                $('#action').val('Add');
+                                $('#action_button').text('Add');
+                                $('#action_modal').modal('show');
+                            });
 
+                            $('#sample_form').on('submit', function (e) {
+                                const selectedPlantId = '<%= selectedPlant.id %>';
 
-$('#confirmDelete').on('click', function(){
-        const selectedPlantId = '<%= selectedPlant.id %>';
-       
-    // Perform AJAX request to delete the item
-     
-    $.ajax({
-        url: `/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
-        method: 'POST',
-        data: { action: 'delete', selectedPlantId: selectedPlantId },
-        dataType: 'json',
-        success: function(response) {
-                load_data()
-        },  
-    });
-    })
+                                e.preventDefault();
+                                let formData = $('#sample_form').serialize();
+                                formData += '&part=detail';
 
+                                $.ajax({
+                                    url: `/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
+                                    method: 'POST',
+                                    data: formData,
 
-//Edit 
+                                    dataType: 'JSON',
+                                    beforeSend: function () {
+                                        $('#action_button').attr('disabled', 'disabled')
+                                    },
+                                    success: function (data) {
+                                        $('#action_button').attr('disabled', false);
+                                        $('#action_modal').modal('hide');
+                                        load_data();
+                                    }
+                                })
+                            })
 
-$(document).on('click', '#edit_data', function() {
-   
-   
-    $('#detailRow').find('.align-middle').attr('contenteditable', true);
-    // Show the input field and hide the span element
-    $('#detailRow').find('.editDateInput').each(function() {
-        let currentValue = $(this).closest('.dataPart').find('.dateSpan').text(); 
-        $(this).val(currentValue);
-    });
-    $('#delete_data, #edit_data').hide();
-    $('.saveButton, .cancelButton').show();
-    $('#detailRow').find('.editDateInput').show();
-    $('#detailRow').find('.dateSpan').hide();
-   
-    
-
-});
-
-
-    $(document).on('click', '.cancelButton', function() {
-       
-        // Revert to original values
-        $('#detailRow').find('.editDateInput').hide();
-        $('#detailRow').find('.dateSpan').show(); 
-        $('#detailRow').find('.align-middle').removeAttr('contenteditable');
-        $('#delete_data, #edit_data').show();
-        $('.saveButton, .cancelButton').hide();
-    });
+                            //delete detail
 
 
 
-    $(document).on('click', '.saveButton', function() {
-        
-        const selectedPlantId = '<%= selectedPlant.id %>';
-       
-    // Gather updated data from input fields
-    let updatedData = {
-        light:  $('#detailRow').find('.editDateInput').eq(0).val(),
-        water:  $('#detailRow').find('.editDateInput').eq(1).val(),
-        soil:  $('#detailRow').find('.editDateInput').eq(2).val(),
-    };
-        
+                            $('#confirmDelete').on('click', function () {
+                                const selectedPlantId = '<%= selectedPlant.id %>';
 
-    // Send AJAX request to update data
-    $.ajax({
-    url: `/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
-    method: 'POST',
-    data: {
-        action: 'Edit',
-        selectedPlantId: selectedPlantId,
-        ...updatedData
-    },
-    dataType: 'json',
-    beforeSend: function(){
-                $('.saveButton').attr('disabled','disabled')
-            },
-    success: function(response) {
-        load_data()
-        $('.saveButton').attr('disabled',false);
-        $('#detailRow').find('.editDateInput').hide();
-        $('#detailRow').find('.dateSpan').show(); 
-        $('#detailRow').find('.align-middle').removeAttr('contenteditable');
-        $('#delete_data, #edit_data').show();
-        $('.saveButton, .cancelButton').hide();
-        
-    },
-    // error: function(xhr, status, error) {
-    //     // Handle error
-    //     console.error('Error:', error);
-    // }
-});
-});
+                                // Perform AJAX request to delete the item
+
+                                $.ajax({
+                                    url: `/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
+                                    method: 'POST',
+                                    data: {
+                                        action: 'delete',
+                                        part: 'detail',
+                                        selectedPlantId: selectedPlantId
+                                    },
+                                    dataType: 'json',
+                                    success: function (response) {
+                                        load_data()
+                                    },
+                                });
+                            })
+
+
+                            //Edit 
+
+                            $(document).on('click', '#edit_data', function () {
+
+
+                                $('#detailRow').find('.align-middle').attr('contenteditable', true);
+                                // Show the input field and hide the span element
+                                $('#detailRow').find('.editDateInput').each(function () {
+                                    let currentValue = $(this).closest('.dataPart').find('.dateSpan').text();
+                                    $(this).val(currentValue);
+                                });
+                                $('#delete_data, #edit_data').hide();
+                                $('.saveButton, .cancelButton').show();
+                                $('#detailRow').find('.editDateInput').show();
+                                $('#detailRow').find('.dateSpan').hide();
 
 
 
-//Add new diary
+                            });
 
-function addDiaryEntry() {
-    // Create a new diary entry element
-    var newDiaryEntry = $('<div>').addClass('col-lg-6 mb-3');
 
-    // Construct the HTML content for the diary entry
-    newDiaryEntry.html(`
-        <!-- Diary Entry -->
-        <div class="d-flex flex-row align-items-center">
-            <!-- Date input -->
-            <div class="form-group mb-0 me-3">
-                <label for="diaryDate" class="me-1">Date:</label>
-                <input type="date" class="form-control form-control-sm" id="diaryDate">
-            </div>
-            <!-- Checkboxes for actions -->
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="waterCheckbox">
-                <label class="form-check-label" for="waterCheckbox">Water</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="mistCheckbox">
-                <label class="form-check-label" for="mistCheckbox">Mist</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="fertilizeCheckbox">
-                <label class="form-check-label" for="fertilizeCheckbox">Fertilize</label>
-            </div>
-        </div>
+                            $(document).on('click', '.cancelButton', function () {
 
-        <!-- Textarea for diary content -->
-        <div class="form-group mt-3">
-            <label for="diaryContent">Diary Content</label>
-            <textarea class="form-control" id="diaryContent" rows="5"></textarea>
-        </div>
-    `);
-
-    // Append the new diary entry to the container
-    $('#diaryEntries').append(newDiaryEntry);
-}
- 
+                                // Revert to original values
+                                $('#detailRow').find('.editDateInput').hide();
+                                $('#detailRow').find('.dateSpan').show();
+                                $('#detailRow').find('.align-middle').removeAttr('contenteditable');
+                                $('#delete_data, #edit_data').show();
+                                $('.saveButton, .cancelButton').hide();
+                            });
 
 
 
+                            $(document).on('click', '.saveButton', function () {
+
+                                const selectedPlantId = '<%= selectedPlant.id %>';
+
+                                // Gather updated data from input fields
+                                let updatedData = {
+                                    light: $('#detailRow').find('.editDateInput').eq(0).val(),
+                                    water: $('#detailRow').find('.editDateInput').eq(1).val(),
+                                    soil: $('#detailRow').find('.editDateInput').eq(2).val(),
+                                };
+
+
+                                // Send AJAX request to update data
+                                $.ajax({
+                                    url: `/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
+                                    method: 'POST',
+                                    data: {
+                                        action: 'Edit',
+                                        part: 'detail',
+                                        selectedPlantId: selectedPlantId,
+                                        ...updatedData
+                                    },
+                                    dataType: 'json',
+                                    beforeSend: function () {
+                                        $('.saveButton').attr('disabled', 'disabled')
+                                    },
+                                    success: function (response) {
+                                        load_data()
+                                        $('.saveButton').attr('disabled', false);
+                                        $('#detailRow').find('.editDateInput').hide();
+                                        $('#detailRow').find('.dateSpan').show();
+                                        $('#detailRow').find('.align-middle').removeAttr('contenteditable');
+                                        $('#delete_data, #edit_data').show();
+                                        $('.saveButton, .cancelButton').hide();
+
+                                    },
+                                    // error: function(xhr, status, error) {
+                                    //     // Handle error
+                                    //     console.error('Error:', error);
+                                    // }
+                                });
+                            });
 
 
 
+                            //Add new diary
+
+                            // function addDiaryEntry() {
+                            //     // Create a new diary entry element
+                            //     var newDiaryEntry = $('<div>').addClass('col-lg-6 mb-3');
+
+                            //     // Construct the HTML content for the diary entry
+                            //     newDiaryEntry.html(`
+                            //         <!-- Diary Entry -->
+                            //         <div class="d-flex flex-row align-items-center">
+                            //             <!-- Date input -->
+                            //             <div class="form-group mb-0 me-3">
+                            //                 <label for="diaryDate" class="me-1">Date:</label>
+                            //                 <input type="date" class="form-control form-control-sm" id="diaryDate">
+                            //             </div>
+                            //             <!-- Checkboxes for actions -->
+                            //             <div class="form-check form-check-inline">
+                            //                 <input class="form-check-input" type="checkbox" id="waterCheckbox">
+                            //                 <label class="form-check-label" for="waterCheckbox">Water</label>
+                            //             </div>
+                            //             <div class="form-check form-check-inline">
+                            //                 <input class="form-check-input" type="checkbox" id="mistCheckbox">
+                            //                 <label class="form-check-label" for="mistCheckbox">Mist</label>
+                            //             </div>
+                            //             <div class="form-check form-check-inline">
+                            //                 <input class="form-check-input" type="checkbox" id="fertilizeCheckbox">
+                            //                 <label class="form-check-label" for="fertilizeCheckbox">Fertilize</label>
+                            //             </div>
+                            //         </div>
+
+                            //         <!-- Textarea for diary content -->
+                            //         <div class="form-group mt-3">
+                            //             <label for="diaryContent">Diary Content</label>
+                            //             <textarea class="form-control" id="diaryContent" rows="5"></textarea>
+                            //         </div>
+                            //     `);
+
+                            //     // Append the new diary entry to the container
+                            //     $('#diaryEntries').append(newDiaryEntry);
+                            // }
 
 
 
 
 
 
-function loadDiary(){
-    const selectedPlantId = '<%= selectedPlant.id %>';
-        $.ajax({
-            url:`/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
-            method:'POST',
-            data:{action:'fetch'},
-            dataType:'JSON',
-            success:function(data){
-                let html = '';
-                if(data.data.length>0)
-                {
-                    for (let count = 0; count < data.data.length; count ++)
-                    {
-                        html += `
 
-                        <div class="d-flex flex-row align-items-center">
-        
-                             <div class="form-group mb-0 me-3">
-                                 <label for="diaryDate" class="me-1">Date:</label>
+
+
+                            function loadDiary() {
+                                const selectedPlantId = '<%= selectedPlant.id %>';
+                                $.ajax({
+                                    url: `/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
+                                    method: 'POST',
+                                    data: {
+                                        action: 'fetch',
+                                        part: 'diary',
+                                    },
+                                    dataType: 'JSON',
+                                    success: function (data) {
+                                        let html = '';
+                                        if (data.data.length > 0) {
+                                            for (let count = 0; count < data.data.length; count++) {
+                                                html += `
+                        <div class='col-lg-6 mb-2 border border-dark p-3'>
+                       
+        3
+                             <div class="form-group mb-0 me-3 ">
+                                 <label class="me-1">Date:</label>
                                      <span class="dateSpan">${formatDate(data.data[count].date)}</span>
                                      <input type="date" class="form-control editDateInput dateInput" name='date' style="display: none; max-width: 150px">
                              </div>
-            
+                        <div class="d-flex flex-row align-items-center mt-3">
+                             <div class="form-check form-check-inline" >
+                                <label class="me-1">Size:</label>
+                                <span class="dateSpan">${data.data[count].size + 'cm'}</span>
+                                <input type="number" min='0' max='300'placeholder=${data.data[count].size} class="form-control editDateInput" name='size'style="display: none;amx-width: 45px">
+                                </div>
+
+
                            <div class="form-check form-check-inline">
-                                <label class="form-check-label" for="waterCheckbox">Water</label>
+                                <label class="form-check-label" >Water:</label>
                                 <span class="dateSpan">${data.data[count].water}</span>
-                                <input class="form-check-input editDateInput dateInput" type="checkbox" id="waterCheckbox"  name='water' style="display: none;max-width: 150px">
+                                <input class="form-check-input editDateInput dateInput" type="checkbox" id="waterCheckbox"  name='water' style="display: none;max-width: 50px">
                                 
                            </div>
                            <div class="form-check form-check-inline"> 
-                               <label class="form-check-label" for="mistCheckbox">Mist</label>
+                               <label class="form-check-label" >Mist:</label>
                                <span class="dateSpan">${data.data[count].mist}</span>
-                                <input class="form-check-input" type="checkbox" id="mistCheckbox" editDateInput dateInput" name='mist' style="display: none;max-width: 150px">
+                                <input class="form-check-input" type="checkbox" id="mistCheckbox" editDateInput dateInput" name='mist' style="display: none;max-width: 50px">
                            </div>
                           <div class="form-check form-check-inline">
                                 
-                                <label class="form-check-label" for="fertilizeCheckbox">Fertilize</label>
+                                <label class="form-check-label" >Fertilise:</label>
                                 <span class="dateSpan">${data.data[count].fertilise}</span>
-                                <input class="form-check-input editDateInput dateInput" " type="checkbox" id="fertiliseCheckbox" name='fertilise' style="display: none; max-width: 150px">
+                                <input class="form-check-input editDateInput dateInput" placeholder='Type your diary here...' type="checkbox" id="fertiliseCheckbox" name='fertilise' style="display: none; max-width: 50px">
                           </div>
 
                         </div>
 
-                          <div class="form-group mt-3">
-                          <label for="diaryContent">Diary Content</label>
-                          <span class="dateSpan">${data.data[count].content}</span>
-                               <textarea class="form-control editDateInput dateInput" id="diaryContent" rows="5"  name='content' style="display: none"></textarea>
-                         </div>
+                        <div class="form-group mt-3" style="height: 120px;">
+                             <label>Note</label>
+                        <br>
+                               <span class="dateSpan d-block h-100">${data.data[count].content}</span>
+                              <textarea class="form-control editDateInput dateInput h-100" id="diaryContent" rows="5" name='content' style="display: none; height: 100%;"></textarea>
+                        </div>
                          <button type="button" class="btn editButton" data-item-id="${data.data[count]._id}">
                                 <img src='/images/editIcon.png' width='20px' alt="delete">
                          </button>
                          <button type="button" class="btn deleteButton" data-bs-toggle="modal" data-bs-target="#deleteModal" data-item-id="${data.data[count]._id}">
                                 <img src='/images/deleteIcon.png' width='20px' alt="delete">
                          </button>
-                        <button type="button" class="btn  saveButton" style="display: none;">
+                        <button type="button" class="btn  diarySaveButton" style="display: none;">
                                 <img src='/images/confirmIcon.jpeg' width='20px' alt="confirm">
                          </button>
-                         <button type="button" class="btn cancelButton" style="display: none;">
+                         <button type="button" class="btn diaryCancelButton" style="display: none;">
                                 <img src='/images/cancelIcon.jpeg' width='20px' alt="cancel">
                          </button>
-
+                         </div>
                         `;
 
-                        function formatDate(dateString) {
-                             const date = new Date(dateString);
-                             const options = { day: 'numeric', month: 'short', year: 'numeric' };
-                             return date.toLocaleDateString('en-US', options);
-                        }
-                    }
-                }
-                $('#diaryEntries').html(html);
-            }
-        })
-    }
+                                                function formatDate(dateString) {
+                                                    const date = new Date(dateString);
+                                                    const options = { day: 'numeric', month: 'short', year: 'numeric' };
+                                                    return date.toLocaleDateString('en-US', options);
+                                                }
+                                            }
+                                        }
+                                        $('#diaryEntries').html(html);
+                                    }
+                                })
+                            }
+
+                            $('#addDiaryBtn').click(function () {
+                                $('#diaryForm')[0].reset();
+                                $('#action').val('Add');
+
+                            });
+
+                            $('#diaryForm').on('submit', function (e) {
+                                const selectedPlantId = '<%= selectedPlant.id %>';
+                                e.preventDefault();
+
+                                let formData = $('#diaryForm').serialize();
+                                formData += '&part=diary';
+                                $.ajax({
+                                    url: `/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
+                                    method: 'POST',
+                                    data: formData,
+                                    dataType: 'JSON',
+                                    beforeSend: function () {
+                                        $('#saveDiaryBtn').attr('disabled', 'disabled')
+                                    },
+                                    success: function (data) {
+                                        $('#saveDiaryBtn').attr('disabled', false);
+                                        $('#addDiaryModal').modal('hide');
+                                        loadDiary();
+                                    }
+                                })
+                            })
+
+                            //Pass the id of item to the comfirm delete button in the modal
+                            $(document).on('click', '.deleteButton', function () {
+                                let id = $(this).data('item-id'); // Extract item ID from the delete button that triggered the modal
+                                $('#confirmDelete').data('item-id', id); // Set the item ID in the confirmDelete button's data attribute
+                            });
 
 
+                            $('#confirmDelete').on('click', function () {
+                                let id = $(this).data('item-id'); // Extract item ID from the button's data attribute
+                                // Perform AJAX request to delete the item
+                                console.log('this is the id:  ' + id)
+                                $.ajax({
+                                    url: 'http://localhost:3000/<%= user.name.split(" ")[0] %>',
+                                    method: 'POST',
+                                    data: { action: 'delete', id: id },
+                                    dataType: 'json',
+                                    success: function (response) {
+                                        load_data()
+                                    },
+                                });
+                            })
 
+                        })
 
-})
-
-</script>
-
+                    </script>

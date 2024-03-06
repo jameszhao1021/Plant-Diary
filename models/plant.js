@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
-const detailSchema = require('./detail')
+
 
 const plantSchema = new Schema({
     name: {
