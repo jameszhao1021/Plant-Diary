@@ -9,20 +9,20 @@ With Plant Diary, you can effortlessly log the growth and care of each plant in 
 ## Screenshot
 
 ![Screenshot of the Plant Diary](./public/images/screenshots/screenshot1.png)
-Login page
+The login page
 
 ![Screenshot of the Plant Diary](./public/images/screenshots/screenshot2.png)
-List of plant
+The list of plant
 
 ![Screenshot of the Plant Diary](./public/images/screenshots/screenshot3.png)
-Diary page
+The diary page
 
 ![Screenshot of the Plant Diary](./public/images/screenshots/screenshot4.png)
-Customised background image
+The customised background image
 
 ## Technologies Used
 
-JQuery, Ajax, Bootstrap, Express and MongoDB were used in this game.
+JQuery, Ajax, Bootstrap, Express and MongoDB were used in this app.
 
 ## Getting Started
 
