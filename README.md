@@ -10,10 +10,13 @@ With Plant Diary, you can effortlessly log the growth and care of each plant in 
 
 ![Screenshot of the Plant Diary](./public/images/screenshots/screenshot1.png)
 Login page
+
 ![Screenshot of the Plant Diary](./public/images/screenshots/screenshot2.png)
 List of plant
+
 ![Screenshot of the Plant Diary](./public/images/screenshots/screenshot3.png)
 Diary page
+
 ![Screenshot of the Plant Diary](./public/images/screenshots/screenshot4.png)
 Customised background image
 
