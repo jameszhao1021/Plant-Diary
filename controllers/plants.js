@@ -71,15 +71,12 @@ async function crudOperations(req, res) {
                 res.json({ message: 'Plant deleted successfully' });
            
         }
-        if (action === 'Edit') {
-         
+        if (action === 'Edit') {     
                 // Extract data from the request body
                 const id = req.body.id;
-                console.log(id)
-                console.log(req.body);
+                console.log('current body: ', req.body)
                 const existingPlant = await Plant.findById(id);
-                console.log(existingPlant);
-              console.log(typeof(req.body.price))
+                console.log('current existed detail: '+existingPlant)
                 const updatedData = {
                     // Check if each field has been edited, if not, keep the existing value
                     name: req.body.name.length !== 0?req.body.name : existingPlant.name,
@@ -88,19 +85,15 @@ async function crudOperations(req, res) {
                     date: req.body.date.length !== 0? req.body.date : existingPlant.date,
                     // Add other fields as needed
                 };        
-               console.log(updatedData)
                 // Find the plant by its ID and update it with the new data
                 const updatedPlant = await Plant.findByIdAndUpdate(id, updatedData, { new: true });
         
                 // // Check if the plant was found and updated
                 if (!updatedPlant) {
                     return res.status(404).json({ error: 'Plant not found' });
-                }
-                
+                }               
                 // // Send a success response with the updated plant
-                res.status(200).json({ message: 'Plant updated successfully', updatedPlant: updatedPlant });
-
-           
+                res.status(200).json({ message: 'Plant updated successfully', updatedPlant: updatedPlant });           
         }
     } catch (error) {
         // Handle any errors that occur during database query or processing

@@ -137,30 +137,43 @@ async function crudOperations(req, res) {
 
         }
         if (action === 'Edit') {
+            const id = req.body.id;
+          
 
             // Extract data from the request body
             const plantId = req.body.selectedPlantId;
-            const existingDetail = await Detail.findOne({plant:plantId})
-            console.log('current existed detail: '+existingDetail)
+         
+            const existingDiary = await Diary.findById(id);
+            console.log('current existed detail: '+existingDiary)
             console.log('see the body when editing:', req.body)
+            const water = req.body.water.length !== 0 ? req.body.water : existingDiary.water;
+            const mist = req.body.mist.length !== 0 ? req.body.mist : existingDiary.mist;
+            const fertilise = req.body.fertilise.length !== 0 ? req.body.fertilise : existingDiary.fertilise;
+            const waterValue = water == 'true' ? true : false;
+            const mistValue = mist == 'true' ? true : false;
+            const fertiliseValue = fertilise == 'true' ? true : false;
             const updatedData = {
                 // Check if each field has been edited, if not, keep the existing value
-                light: req.body.light.length !== 0 ? req.body.light : existingDetail.light,
-                water: req.body.water.length !== 0 ? req.body.water : existingDetail.water,
-                soil: req.body.soil.length !== 0 ? req.body.soil : existingDetail.soil,
+                
+                date: req.body.date.length !== 0 ? req.body.date : existingDiary.date,
+                size: req.body.size.length !== 0 ? req.body.size : existingDiary.size,
+                water: waterValue,
+                mist: mistValue,
+                fertilise: fertiliseValue,
+                content: req.body.content.length !== 0 ? req.body.content : existingDiary.content,
                 // Add other fields as needed
             };
             console.log(updatedData)
             // Find the plant by its ID and update it with the new data
-            const updatedDetail= await Detail.findOneAndUpdate({plant:plantId}, updatedData, { new: true });
+            const updatedDiary= await Diary.findOneAndUpdate({ _id: id }, updatedData, { new: true });
 
             // // Check if the plant was found and updated
-            if (!existingDetail) {
+            if (!existingDiary) {
                 return res.status(404).json({ error: 'Detail not found' });
             }
 
             // // Send a success response with the updated plant
-            res.status(200).json({ message: 'Plant updated successfully', updatedDetail: updatedDetail });
+            res.status(200).json({ message: 'Plant updated successfully', updatedDiary: updatedDiary });
 
 
         }

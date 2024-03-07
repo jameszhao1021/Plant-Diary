@@ -384,7 +384,7 @@
                     if (data.data.length > 0) {
                         for (let count = 0; count < data.data.length; count++) {
                             html += `
-                                    <div class=' mb-3 border  border-dark p-3 diaryData' style="height: 300px;">                                   
+                                    <div class=' mb-3 border rounded shadow border-dark p-3 diaryData' style="height: 300px;">                                   
                                         <div class="form-group row flex-row mb-0 me-3 diaryDataInput">
                                             <div class="d-flex align-items-center">
                                             <label class="me-1">Date:</label>
@@ -529,37 +529,152 @@
     })
     
     //Edit diary
-    // $(document).on('click', '.editButton', function() {
-    //     let id = $(this).data('item-id')
-    //     $('.saveButton').data('item-id', id);
-    //     let diaryData = $(this).closest('.diaryData');
-    //     diaryData.find('.editDateInput').attr('contenteditable', true);
-    //     // Show the input field and hide the span element
+//     $(document).on('click', '.editButton', function() {
+//         let id = $(this).data('item-id')
+//         $('.saveButton').data('item-id', id);
+//         let diaryData = $(this).closest('.diaryData');
+//         diaryData.find('.editDateInput').attr('contenteditable', true);
+//         // Show the input field and hide the span element
         
-    //     diaryData.find('.editDateInput').each(function() {
-    //         let currentValue = $(this).closest('.dataSpan').val(); // Get the current value
-    //         $(this).val(''); // Clear any previously typed value
-    //         $(this).attr('placeholder', currentValue); // Set the placeholder to the current value
-    //     });
+//         diaryData.find('.editDateInput').each(function() {
+//             let currentValue = $(this).closest('.dataSpan').val(); // Get the current value
+//             $(this).val(''); // Clear any previously typed value
+//             $(this).attr('placeholder', currentValue); // Set the placeholder to the current value
+//         });
        
-    //     diaryData.find('.editDateInput').show();
-    //     diaryData.find('.dataSpan').hide();
-    //     diaryData.find('.editButton, .deleteButton').hide();
-    //     diaryData.find('.diarySaveButton, .diaryCancelButton').show();
+//         diaryData.find('.editDateInput').show();
+//         diaryData.find('.dataSpan').hide();
+//         diaryData.find('.editButton, .deleteButton').hide();
+//         diaryData.find('.diarySaveButton, .diaryCancelButton').show();
 
-    // });
+//     });
+//     $(document).on('click', '.editButton', function() {
+//     let id = $(this).data('item-id');
+//     $('.saveButton').data('item-id', id);
+//     let diaryData = $(this).closest('.diaryData');
+
+//     // Show the input field and hide the span element
+//     diaryData.find('.editDateInput').each(function() {
+//         let currentValue;
+//         if ($(this).is('input[type="checkbox"]')) {
+//             // For checkboxes, check or uncheck based on the value
+//             currentValue = $(this).closest('.diaryDataInput').find('.dataSpan').text().trim() === 'Y';
+//             $(this).prop('checked', currentValue);
+//         } else if ($(this).is('input[type="number"]')) {
+//             // For number inputs, show the current value and set up arrow click event
+//             currentValue = parseInt($(this).closest('.diaryDataInput').find('.dataSpan').text().trim());
+//             $(this).val(currentValue);
+//             $(this).on('input', function() {
+//                 if (isNaN(parseInt($(this).val()))) {
+//                     $(this).val(currentValue);
+//                 } else {
+//                     currentValue = parseInt($(this).val());
+//                 }
+//             });
+//         } else if ($(this).is('input[type="date"]')) {
+//         // For date inputs, show the current value
+//         currentValue = $(this).closest('.diaryDataInput').find('.dataSpan').text().trim();
+//         $(this).val(currentValue);
+//         } else if ($(this).is('textarea')){
+//             // For other input types, show the current value
+//             currentValue = $(this).closest('.diaryDataInput').find('.dataSpan').text().trim();
+//             $(this).val(currentValue);
+//         }
+//     });
+
+//     diaryData.find('.editDateInput').show();
+//     diaryData.find('.dataSpan').hide();
+//     diaryData.find('.editButton, .deleteButton').hide();
+//     diaryData.find('.diarySaveButton, .diaryCancelButton').show();
+// });
+
+//         $(document).on('click', '.diaryCancelButton', function() {
+//             let diaryData = $(this).closest('.diaryData');
+
+//             // Revert to original values
+//             diaryData.find('.editDateInput').hide();
+//             diaryData.find('.dataSpan').show(); 
+//             diaryData.find('.editButton, .deleteButton').show();
+//             diaryData.find('.diarySaveButton, .diaryCancelButton').hide();
+//         });
+
+//         $(document).on('click', '.diarySaveButton', function() {
+//          const selectedPlantId = '<%= selectedPlant.id %>';
+//         let id = $(this).data('item-id');
+//         let diaryData = $(this).closest('.diaryData');
+        
+//         // Gather updated data from input fields
+//         let updatedData = {
+//             date: diaryData.find('.editDateInput').eq(0).val(),
+//             size: diaryData.find('.editDateInput').eq(1).val(),
+//             water: diaryData.find('.editDateInput').eq(2).val(),
+//             mist: diaryData.find('.editDateInput').eq(3).val(),
+//             fertilise: diaryData.find('.editDateInput').eq(4).val(),
+//             content: diaryData.find('.editDateInput').eq(5).val(),
+//         };
+            
+//         // Send AJAX request to update data
+//         $.ajax({
+//             url: `/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
+//             method: 'POST',
+//             data: {
+//                 action: 'Edit',                
+//                 part:'diary',
+//                 id: id,
+//                 ...updatedData
+//             },
+//             dataType: 'json',
+//             beforeSend: function(){
+//                         $('.diarySaveButton').attr('disabled','disabled')
+//                     },
+//             success: function(response) {
+//                 loadDiary();
+//                 $('.diarySaveButton').attr('disabled',false);
+//                 diaryData.find('.editDateInput').hide();
+//                 diaryData.find('.dataSpan').show();
+//                 diaryData.find('.editButton, .deleteButton').show();
+//                 diaryData.find('.diarySaveButton, .diaryCancelButton').hide();       
+//             },
+//     });
+//     });
+   
+
+$(document).on('click', '.editButton', function() {
+        let id = $(this).data('item-id')
+        $('.diarySaveButton').data('item-id', id);
+        let diaryData = $(this).closest('.diaryData');
+
+        
+        diaryData.find('.dataSpan').each(function() {
+        $(this).data('original-value', $(this).val());
+    });
+    let originalValue = diaryData.find('.dataSpan').data('original-value');
+    console.log('see originnal: '+originalValue);
+        // Show the input field and hide the span element
+        
+        diaryData.find('.editDateInput').each(function() {
+            let currentValue = $(this).closest('.dataSpan').val(); // Get the current value
+            $(this).val(''); // Clear any previously typed value
+            $(this).attr('placeholder', currentValue); // Set the placeholder to the current value
+        });
+       
+        diaryData.find('.editDateInput').show();
+        diaryData.find('.dataSpan').hide();
+        diaryData.find('.editButton, .deleteButton').hide();
+        diaryData.find('.diarySaveButton, .diaryCancelButton').show();
+
+    });
     $(document).on('click', '.editButton', function() {
     let id = $(this).data('item-id');
     $('.saveButton').data('item-id', id);
     let diaryData = $(this).closest('.diaryData');
-    diaryData.find('.editDateInput').attr('contenteditable', true);
 
     // Show the input field and hide the span element
     diaryData.find('.editDateInput').each(function() {
         let currentValue;
         if ($(this).is('input[type="checkbox"]')) {
             // For checkboxes, check or uncheck based on the value
-            currentValue = $(this).closest('.diaryDataInput').find('.dataSpan').text().trim() === 'true';
+            currentValue = $(this).closest('.diaryDataInput').find('.dataSpan').text().trim() === 'Y';
             $(this).prop('checked', currentValue);
         } else if ($(this).is('input[type="number"]')) {
             // For number inputs, show the current value and set up arrow click event
@@ -572,7 +687,7 @@
                     currentValue = parseInt($(this).val());
                 }
             });
-        } else {
+        }  else if ($(this).is('textarea')){
             // For other input types, show the current value
             currentValue = $(this).closest('.diaryDataInput').find('.dataSpan').text().trim();
             $(this).val(currentValue);
@@ -585,54 +700,61 @@
     diaryData.find('.diarySaveButton, .diaryCancelButton').show();
 });
 
-        $(document).on('click', '.cancelButton', function() {
-            let row = $(this).closest('tr');
+        $(document).on('click', '.diaryCancelButton', function() {
+            let diaryData = $(this).closest('.diaryData');
+
             // Revert to original values
-            row.find('.editDateInput').hide();
-            row.find('.dataSpan').show(); 
-            row.find('.diaryDataInput').removeAttr('contenteditable');
-            row.find('.editButton, .deleteButton').show();
-            row.find('.saveButton, .cancelButton').hide();
+            diaryData.find('.editDateInput').hide();
+            diaryData.find('.dataSpan').show(); 
+            diaryData.find('.editButton, .deleteButton').show();
+            diaryData.find('.diarySaveButton, .diaryCancelButton').hide();
         });
 
-        $(document).on('click', '.saveButton', function() {
-            
+        $(document).on('click', '.diarySaveButton', function() {
+         const selectedPlantId = '<%= selectedPlant.id %>';
         let id = $(this).data('item-id');
-        let row = $(this).closest('tr');
+        console.log('the id is: '+id)
+        let diaryData = $(this).closest('.diaryData');
         
+       const  waterValue = diaryData.find('.editDateInput').eq(2).prop('checked') ? true : false;
+       const  mistValue = diaryData.find('.editDateInput').eq(3).prop('checked') ? true : false;
+       const  fertiliseValue = diaryData.find('.editDateInput').eq(4).prop('checked') ? true : false;
         // Gather updated data from input fields
         let updatedData = {
-            name: row.find('.editDateInput').eq(0).val(),
-            location: row.find('.editDateInput').eq(1).val(),
-            price: row.find('.editDateInput').eq(2).val(),
-            date: row.find('.editDateInput').eq(3).val(),
+            date: diaryData.find('.editDateInput').eq(0).val(),
+            size: diaryData.find('.editDateInput').eq(1).val(),
+            water: waterValue,
+            mist: mistValue,
+            fertilise: fertiliseValue,
+            content: diaryData.find('.editDateInput').eq(5).val(),
         };
             
         // Send AJAX request to update data
         $.ajax({
-        url: 'http://localhost:3000/<%= user.name.split(" ")[0] %>',
-        method: 'POST',
-        data: {
-            action: 'Edit',
-            id: id,
-            ...updatedData
-        },
-        dataType: 'json',
-        beforeSend: function(){
-                    $('.saveButton').attr('disabled','disabled')
-                },
-        success: function(response) {
-            load_data()
-            $('.saveButton').attr('disabled',false)
-            row.find('.editDateInput').hide();
-            row.find('.dataSpan').show(); 
-            row.find('.align-middle').removeAttr('contenteditable');
-            row.find('.detailButton, .editButton, .deleteButton').show();
-            row.find('.saveButton, .cancelButton').hide();       
-        },
+            url: `/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
+            method: 'POST',
+            data: {
+                action: 'Edit',                
+                part:'diary',
+                id: id,
+                ...updatedData
+            },
+            dataType: 'json',
+            beforeSend: function(){
+                        $('.diarySaveButton').attr('disabled','disabled')
+                    },
+            success: function(response) {
+                loadDiary();
+                $('.diarySaveButton').attr('disabled',false);
+                diaryData.find('.editDateInput').hide();
+                diaryData.find('.dataSpan').show();
+                diaryData.find('.editButton, .deleteButton').show();
+                diaryData.find('.diarySaveButton, .diaryCancelButton').hide();       
+            },
     });
     });
-   
+
+
    })
 
 </script>
