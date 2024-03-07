@@ -266,10 +266,6 @@
                     $('.saveButton, .cancelButton').hide();
 
                 },
-                // error: function(xhr, status, error) {
-                //     // Handle error
-                //     console.error('Error:', error);
-                // }
             });
         });
 
@@ -289,50 +285,50 @@
                         for (let count = 0; count < data.data.length; count++) {
                             html += `
                                     <div class=' mb-3 border rounded shadow border-dark p-3 diaryData' style="height: 300px;">                                   
-                                        <div class="form-group row flex-row mb-0 me-3 diaryDataInput">
-                                            <div class="d-flex align-items-center">
-                                            <label class="me-1">Date:</label>
+                                        <div class='form-group row flex-row mb-0 me-3 diaryDataInput'>
+                                            <div class='d-flex align-items-center'>
+                                            <label class='me-1'>Date:</label>
                                             
-                                                <span class="dataSpan">${formatDate(data.data[count].date)}</span>
-                                                <input type="date" class="form-control editDateInput dateInput" name='date' style="display: none; max-width: 150px">
+                                                <span class='dataSpan'>${formatDate(data.data[count].date)}</span>
+                                                <input type='date' class='form-control editDateInput dateInput' name='date' style='display: none; max-width: 150px'>
                                             </div>
                                             </div>
-                                            <div class="d-flex flex-row align-items-center mt-3">                                             
-                                                <div class="form-check form-check-inline diaryDataInput">
-                                                    <div class="d-flex align-items-center">
-                                                        <label class="me-1">Size:</label>
-                                                        <span class="dataSpan">${data.data[count].size + 'cm'}</span>
-                                                        <input type="number" min="0" max="300" placeholder="${data.data[count].size}" class="form-control editDateInput" name="size" style="display: none; max-width: 45px">
+                                            <div class='d-flex flex-row align-items-center mt-3'>                                             
+                                                <div class='form-check form-check-inline diaryDataInput'>
+                                                    <div class='d-flex align-items-center'>
+                                                        <label class='me-1'>Size:</label>
+                                                        <span class='dataSpan'>${data.data[count].size + 'cm'}</span>
+                                                        <input type='number' min='0' max='300' placeholder='${data.data[count].size}' class='form-control editDateInput' name='size' style='display: none; max-width: 45px'>
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check-inline diaryDataInput">
-                                                    <div class="d-flex align-items-center">
-                                                        <label class="form-check-label me-1">Water:</label>
-                                                        <div class="flex-grow-1"> 
-                                                            <span class="dataSpan">${data.data[count].water ? '<img src="/images/yesIcon.png" alt="yes" width="25px">' : '<img src="/images/noIcon.png" alt="no" width="30px">'}</span>
+                                                <div class='form-check-inline diaryDataInput'>
+                                                    <div class='d-flex align-items-center'>
+                                                        <label class='form-check-label me-1'>Water:</label>
+                                                        <div class='flex-grow-1'> 
+                                                            <span class='dataSpan'>${data.data[count].water ? '<img src="/images/yesIcon.png" alt="yes" width="25px">' : '<img src="/images/noIcon.png" alt="no" width="30px">'}</span>
                                                         </div>
                                                 
-                                                            <input class="form-check-input editDateInput dateInput" type="checkbox" id="waterCheckbox"  name='water' style="display: none;max-width: 50px">                                           
+                                                            <input class='form-check-input editDateInput dateInput' type='checkbox' id='waterCheckbox'  name='water' style='display: none;max-width: 50px'>                                           
                                                         
                                                     </div>
                                                 </div>
-                                                <div class="form-check-inline diaryDataInput"> 
-                                                    <div class="d-flex align-items-center">
-                                                        <label class="form-check-label me-1">Mist:</label>
-                                                        <div class="flex-grow-1">
-                                                            <span class="dataSpan">${data.data[count].mist ? '<img src="/images/yesIcon.png" alt="yes" width="25px">' : '<img src="/images/noIcon.png" alt="no" width="30px">'}</span>
+                                                <div class='form-check-inline diaryDataInput'> 
+                                                    <div class='d-flex align-items-center'>
+                                                        <label class='form-check-label me-1'>Mist:</label>
+                                                        <div class='flex-grow-1'>
+                                                            <span class='dataSpan'>${data.data[count].mist ? '<img src="/images/yesIcon.png" alt="yes" width="25px">' : '<img src="/images/noIcon.png" alt="no" width="30px">'}</span>
                                                         </div>
                                                        
-                                                            <input class="form-check-input editDateInput dateInput" type="checkbox" id="mistCheckbox" name='mist' style="display: none;max-width: 50px">
+                                                            <input class='form-check-input editDateInput dateInput' type='checkbox' id='mistCheckbox' name='mist' style='display: none;max-width: 50px'>
                                                         
                                                     </div>
                                                 </div>
-                                                <div class="form-check-inline diaryDataInput">   
-                                                    <div class="d-flex align-items-center">                                 
-                                                        <label class="form-check-label me-1">Fertilise:</label>
-                                                        <div class="flex-grow-1">
-                                                            <span class="dataSpan">${data.data[count].fertilise ? '<img src="/images/yesIcon.png" alt="yes" width="25px">' : '<img src="/images/noIcon.png" alt="no" width="30px">'}</span>
+                                                <div class='form-check-inline diaryDataInput'>   
+                                                    <div class='d-flex align-items-center'>                                 
+                                                        <label class='form-check-label me-1'>Fertilise:</label>
+                                                        <div class='flex-grow-1'>
+                                                            <span class='dataSpan'>${data.data[count].fertilise ? '<img src="/images/yesIcon.png" alt="yes" width="25px">' : '<img src="/images/noIcon.png" alt="no" width="30px">'}</span>
                                                         </div>
                                                        
                                                             <input class="form-check-input editDateInput dateInput" type="checkbox" id="fertiliseCheckbox" name='fertilise' style="display: none; max-width: 50px">
@@ -342,26 +338,26 @@
                                             </div>
                                  
 
-                                    <div class="form-group mt-3 diaryDataInput" style="height: 130px;">
+                                    <div class='form-group mt-3 diaryDataInput' style='height: 130px;'>
                                             <label>Note:</label>
                                             <br>
                                             <div class='dataSpan'>
-                                                <span d-block h-100">${data.data[count].content}</span>
+                                                <span d-block h-100'>${data.data[count].content}</span>
                                             </div>
-                                            <textarea class="form-control editDateInput dateInput" placeholder='Write your diary here...' id="diaryContent" rows="3" name='content' style="display: none;"></textarea>
+                                            <textarea class='form-control editDateInput dateInput' id='diaryContent' rows='3' name='content' style='display: none;'></textarea>
                                         </div>
 
-                                        <button type="button" class="btn editButton " data-item-id="${data.data[count]._id}">
-                                            <img src='/images/editIcon.png' width='20px' alt="delete">
+                                        <button type='button' class='btn editButton ' data-item-id='${data.data[count]._id}'>
+                                            <img src='/images/editIcon.png' width='20px' alt='delete'>
                                         </button>
-                                        <button type="button" class="btn deleteButton" data-bs-toggle="modal" data-bs-target="#diaryDeleteModal" data-item-id="${data.data[count]._id}">
-                                            <img src='/images/deleteIcon.png' width='20px' alt="delete" style='margin-left:-15px'>
+                                        <button type='button' class='btn deleteButton' data-bs-toggle='modal' data-bs-target='#diaryDeleteModal' data-item-id='${data.data[count]._id}'>
+                                            <img src='/images/deleteIcon.png' width='20px' alt='delete' style='margin-left:-15px'>
                                         </button>
-                                    <button type="button" class="btn  diarySaveButton" style="display: none; ">
-                                            <img src='/images/confirmIcon.jpeg' width='20px' alt="confirm" style='margin-top:-10px'>
+                                    <button type='button' class='btn  diarySaveButton' style='display: none; '>
+                                            <img src='/images/confirmIcon.jpeg' width='20px' alt='confirm' style='margin-top:-10px'>
                                         </button>
-                                        <button type="button" class="btn diaryCancelButton" style="display: none;">
-                                            <img src='/images/cancelIcon.jpeg' width='20px' alt="cancel" style='margin-left:-15px; margin-top:-10px'>
+                                        <button type='button' class='btn diaryCancelButton' style='display: none;'>
+                                            <img src='/images/cancelIcon.jpeg' width='20px' alt='cancel' style='margin-left:-15px; margin-top:-10px'>
                                         </button>
                                         </div>
                                     `;
@@ -547,10 +543,8 @@ $(document).on('click', '.editButton', function() {
                 diaryData.find('.editButton, .deleteButton').show();
                 diaryData.find('.diarySaveButton, .diaryCancelButton').hide();       
             },
-    });
-    });
-
-
-   })
+      });
+   });
+})
 
 </script>

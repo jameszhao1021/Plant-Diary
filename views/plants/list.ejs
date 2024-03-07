@@ -1,21 +1,20 @@
 <%- include('../partials/header') %>
 <%- include('../partials/navbar') %>
 
-  <div class="container mainList" >
-    <div class="row justify-content-center" >
-        <div class="col-lg-20" >
-            <button type="button" id="add_data" class="btn btn-sm float-end">
-                <img src='/images/addIcon.png' width='30px' alt="add">
-            </button>
-            
-            <table class="table table-striped table-bordered" id="sample_data">
-                <thead class="thead-dark">
+  <div class='container mainList' >
+    <div class='row justify-content-center' >
+        <div class='col-lg-20' >
+            <button type='button' id='add_data' class='btn btn-sm float-end'>
+                <img src='/images/addIcon.png' width='30px' alt='add'>
+            </button>          
+            <table class='table table-striped table-bordered' id='sample_data'>
+                <thead class='thead-dark'>
                     <tr>
-                        <th class="column-width">Name</th>
-                        <th class="column-width">Bought from</th>
-                        <th class="column-width">Price</th>
-                        <th class="column-width">Date</th>
-                        <th class="column-width">Action</th>
+                        <th class='column-width'>Name</th>
+                        <th class='column-width'>Bought from</th>
+                        <th class='column-width'>Price</th>
+                        <th class='column-width'>Date</th>
+                        <th class='column-width'>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,37 +66,37 @@ $(document).ready(function(){
                     {
                         html += `
                           <tr>
-                             <td class="align-middle dataPart listTd" >     
-                                <span class="dateSpan">${data.data[count].name}</span>
-                                <input type="text" placeholder=${data.data[count].name} class="form-control editDateInput" name='name' style="display: none; max-width: 150px">
+                             <td class='align-middle dataPart listTd' >     
+                                <span class='dateSpan'>${data.data[count].name}</span>
+                                <input type='text' placeholder=${data.data[count].name} class='form-control editDateInput' name='name' style='display: none; max-width: 150px'>
                              </td>
-                             <td class="align-middle dataPart listTd" >
-                                <span class="dateSpan">${data.data[count].location}</span>
-                                <input type="text" placeholder=${data.data[count].location} class="form-control editDateInput" name='location' style="display: none;amx-width: 150px">
+                             <td class='align-middle dataPart listTd' >
+                                <span class='dateSpan'>${data.data[count].location}</span>
+                                <input type='text' placeholder=${data.data[count].location} class='form-control editDateInput' name='location' style='display: none;amx-width: 150px'>
                              </td>
-                             <td class="align-middle dataPart listTd" >
-                                <span class="dateSpan">${'$'+data.data[count].price.toFixed(2)}</span>
-                                <input type="text" placeholder=${data.data[count].price} class="form-control editDateInput" name='price'style="display: none;amx-width: 95px">
+                             <td class='align-middle dataPart listTd' >
+                                <span class='dateSpan'>${'$'+data.data[count].price.toFixed(2)}</span>
+                                <input type='text' placeholder=${data.data[count].price} class='form-control editDateInput' name='price'style='display: none;amx-width: 95px'>
                                 </td>
-                             <td class="align-middle dataPart listTd" >
-                                <span class="dateSpan">${formatDate(data.data[count].date)}</span>
-                                <input type="date" class="form-control editDateInput dateInput" name='date'style="display: none;max-width: 150px">
+                             <td class='align-middle dataPart listTd' >
+                                <span class='dateSpan'>${formatDate(data.data[count].date)}</span>
+                                <input type='date' class='form-control editDateInput dateInput' name='date'style='display: none;max-width: 150px'>
                              </td>
-                             <td class="align-middle listTd listBotton">
-                                <button type="button" class="btn detailButton"  data-item-id="${data.data[count]._id}">
-                                    <img src='/images/diaryIcon.png' width='20px' alt="delete">
+                             <td class='align-middle listTd listBotton'>
+                                <button type='button' class='btn detailButton'  data-item-id='${data.data[count]._id}'>
+                                    <img src='/images/diaryIcon.png' width='20px' alt='delete'>
                                 </button>
-                                <button type="button" class="btn editButton" data-item-id="${data.data[count]._id}">
-                                    <img src='/images/editIcon.png' width='20px' alt="delete">
+                                <button type='button' class='btn editButton' data-item-id='${data.data[count]._id}'>
+                                    <img src='/images/editIcon.png' width='20px' alt='delete'>
                                 </button>
-                                <button type="button" class="btn deleteButton" data-bs-toggle="modal" data-bs-target="#deleteModal" data-item-id="${data.data[count]._id}">
-                                    <img src='/images/deleteIcon.png' width='20px' alt="delete">
+                                <button type='button' class='btn deleteButton' data-bs-toggle='modal' data-bs-target='#deleteModal' data-item-id='${data.data[count]._id}'>
+                                    <img src='/images/deleteIcon.png' width='20px' alt='delete'>
                                 </button>
-                                <button type="button" class="btn  saveButton" style="display: none; background-color: transparent; margin-top:5px">
-                                    <img src='/images/confirmIcon.jpeg' width='20px' alt="confirm">
+                                <button type='button' class='btn  saveButton' style='display: none; background-color: transparent; margin-top:5px'>
+                                    <img src='/images/confirmIcon.jpeg' width='20px' alt='confirm'>
                                 </button>
-                                <button type="button" class="btn  cancelButton" style="display: none; background-color: transparent; margin-top:5px; margin-left:-12px">
-                                    <img src='/images/cancelIcon.jpeg' width='20px' alt="cancel">
+                                <button type='button' class='btn  cancelButton' style='display: none; background-color: transparent; margin-top:5px; margin-left:-12px'>
+                                    <img src='/images/cancelIcon.jpeg' width='20px' alt='cancel'>
                                 </button>
                              </td>
                           </tr>

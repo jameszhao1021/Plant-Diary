@@ -1,47 +1,47 @@
-<div class="modal fade" id="addDiaryModal" tabindex="-1" aria-labelledby="addDiaryModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <form method="post" id="diaryForm">
-      <div class="modal-header">
-        <h5 class="modal-title" id="addDiaryModalLabel">Add Diary Entry</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class='modal fade' id='addDiaryModal' tabindex='-1' aria-labelledby='addDiaryModalLabel' aria-hidden='true'>
+  <div class='modal-dialog modal-dialog-centered'>
+    <div class='modal-content'>
+      <form method='post' id='diaryForm'>
+      <div class='modal-header'>
+        <h5 class='modal-title' id='addDiaryModalLabel'>Add Diary Entry</h5>
+        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
-      <div class="modal-body">
+      <div class='modal-body'>
         <!-- Content goes here -->
-        <div class="col-lg-12">
+        <div class='col-lg-12'>
           <!-- Diary Entry -->
-          <div class="form-group mb-0 me-3 w-100">
-            <label for="modalDiaryDate" class="me-1">Date:</label>
-            <input type="date" class="form-control form-control-sm" name='date'id="modalDiaryDate" style="width: 150px;" >
+          <div class='form-group mb-0 me-3 w-100'>
+            <label for='modalDiaryDate' class='me-1'>Date:</label>
+            <input type='date' class='form-control form-control-sm' name='date'id='modalDiaryDate' style='width: 150px;' >
           </div>
-          <div class="form-group mb-0 me-3 w-100 d-flex flex-row align-items-center" style="margin-top: 15px;">
-            <label class="form-size-label me-1" for="size">Size:</label>
-            <input class="form-size-input me-3" type="number" min="0" name='size' id="size" style="width: 60px;" required>
-            <div class="form-check form-check-inline">
-              <label class="form-check-label" for="modalWaterCheckbox" style="margin-top: 7px;">Water</label>
-              <input class="form-check-input" type="checkbox" name='water' id="modalWaterCheckbox" style="margin-top: 7px;">
+          <div class='form-group mb-0 me-3 w-100 d-flex flex-row align-items-center' style='margin-top: 15px;'>
+            <label class='form-size-label me-1' for='size'>Size:</label>
+            <input class='form-size-input me-3' type='number' min='0' name='size' id='size' style='width: 60px;' required>
+            <div class='form-check form-check-inline'>
+              <label class='form-check-label' for='modalWaterCheckbox' style='margin-top: 7px;'>Water</label>
+              <input class='form-check-input' type='checkbox' name='water' id='modalWaterCheckbox' style='margin-top: 7px;'>
             </div>
-            <div class="form-check form-check-inline">
-              <label class="form-check-label" for="modalMistCheckbox" style="margin-top: 7px;">Mist</label>
-              <input class="form-check-input" type="checkbox" name='mist' id="modalMistCheckbox" style="margin-top: 7px;">
+            <div class='form-check form-check-inline'>
+              <label class='form-check-label' for='modalMistCheckbox' style='margin-top: 7px;'>Mist</label>
+              <input class='form-check-input' type='checkbox' name='mist' id='modalMistCheckbox' style='margin-top: 7px;'>
             </div>
-            <div class="form-check form-check-inline">
-              <label class="form-check-label" for="modalFertiliseCheckbox" style="margin-top: 7px;">Fertilise</label>
-              <input class="form-check-input" type="checkbox" name='fertilise' id="modalFertiliseCheckbox" style="margin-top: 7px;">
+            <div class='form-check form-check-inline'>
+              <label class='form-check-label' for='modalFertiliseCheckbox' style='margin-top: 7px;'>Fertilise</label>
+              <input class='form-check-input' type='checkbox' name='fertilise' id='modalFertiliseCheckbox' style='margin-top: 7px;'>
             </div>
           </div>
           <!-- Textarea for diary content -->
-          <div class="form-group mt-3 w-100">
-            <label for="modalDiaryContent">Diary Content</label>
-            <textarea class="form-control" placeholder='Write your diary here...' content' id="modalDiaryContent" rows="5" required></textarea>
+          <div class='form-group mt-3 w-100'>
+            <label for='modalDiaryContent'>Diary Content</label>
+            <textarea class="form-control" placeholder='Write your diary here...' name='content' id="modalDiaryContent" rows="5" required></textarea>
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <input type="hidden" name="plantId" id="plantId" value="<%= selectedPlant.id %>">
-        <input type="hidden" name="action" id="action" value="Add"> 
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id="saveDiaryBtn">Save Diary</button>
+      <div class='modal-footer'>
+        <input type='hidden' name='plantId' id='plantId' value='<%= selectedPlant.id %>'>
+        <input type='hidden' name='action' id='action' value='Add'> 
+        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+        <button type='submit' class='btn btn-primary' id='saveDiaryBtn'>Save Diary</button>
       </div>
     </form>
     </div>

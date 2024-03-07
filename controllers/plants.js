@@ -10,7 +10,6 @@ async function show(req,res){
 }
 
 async function create(req,res){
- 
     req.body.user = req.user._id;
     console.log(req.body.user)
     req.body.price = parseFloat(req.body.price);
@@ -31,14 +30,14 @@ async function crudOperations(req, res) {
         } 
         if (action === 'Add'){
             console.log(req.body)
-             var name = req.body.name;
-             var location = req.body.location;
-             var price = req.body.price;
-             var date = req.body.date;
+             const name = req.body.name;
+             const location = req.body.location;
+             const price = req.body.price;
+             const date = req.body.date;
              req.body.user = req.user._id;
-             var user = req.body.user;
-             var userName = req.body.userName;
-             var userAvatar = req.body.userAvatar;
+             const user = req.body.user;
+             const userName = req.body.userName;
+             const userAvatar = req.body.userAvatar;
              const newPlant = new Plant({
                 name, location,price, date, user ,userName, userAvatar
              })
@@ -66,9 +65,7 @@ async function crudOperations(req, res) {
         if (action === 'Edit') {     
                 // Extract data from the request body
                 const id = req.body.id;
-                console.log('current body: ', req.body)
                 const existingPlant = await Plant.findById(id);
-                console.log('current existed detail: '+existingPlant)
                 const updatedData = {
                     // Check if each field has been edited, if not, keep the existing value
                     name: req.body.name.length !== 0?req.body.name : existingPlant.name,
@@ -97,6 +94,5 @@ module.exports = {
     index,
     show,
     create,
-   
     crudOperations,
 }
