@@ -11,7 +11,7 @@ passport.use(new GoogleStrategy(
       callbackURL: process.env.GOOGLE_CALLBACK
     },
     // The verify callback function
-    // Let's use async/await!
+
     async function(accessToken, refreshToken, profile, cb) {
       
         try {

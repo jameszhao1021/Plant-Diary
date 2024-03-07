@@ -32,14 +32,19 @@ body {
   left:50%;
   transform: translate(-50%, -50%);
 }
+
 .introduction{
   font-size: 30px;
 }
+
 .introduction:last-child{
   line-height: 2; 
   font-size: 20px;
 }
 
+.card-subtitle{
+  font-size: 20px;
+}
 .introPart{
   animation: slideDown 0.8s ease-out;
   opacity: 0.9;
@@ -50,10 +55,18 @@ body {
   opacity: 0.9;
 }
 
+.googleIcon, .facebookIcon{
+  position:absolute;
+  top:50%;
+  transform: translateY(-50%);
+  left:15px;
+}
+
 .plantDiaryTitle{
   font-family: "Abril Fatface", serif, Arial;
   font-weight: 200;
   font-style:italic;
+  font-size: 30px;
 }
 
 .modal-body .img-thumbnail {
@@ -136,8 +149,17 @@ table{
 
 .diaryData{
   width: 48%;
-  
 }
+
+#addDiaryBtn{
+  background-color: #b8bdad;
+}
+
+#addDiaryBtn:hover {
+  background-color: #679c69; /* Darker green */
+  box-shadow: 0px 7px 10px 0px rgba(0,0,0,0.4); /* Slightly stronger shadow on hover */
+}
+
 .container.outerContainer{
   background-color: white;
   opacity: 0.9;
@@ -152,8 +174,6 @@ table{
   padding-left: 0;
   padding-right: 5px;
 }
-
-
 
 footer{
   opacity:0.9;
