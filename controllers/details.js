@@ -86,7 +86,6 @@ async function crudOperations(req, res) {
             res.json({ data: diaries });
         }
         if (action === 'Add') {
-            console.log('ok, when add, see the body', req.body)
             var date = req.body.date;
             var size = req.body.size;
             var water = req.body.water;
