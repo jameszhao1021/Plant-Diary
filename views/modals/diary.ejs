@@ -16,7 +16,7 @@
           </div>
           <div class="form-group mb-0 me-3 w-100 d-flex flex-row align-items-center" style="margin-top: 15px;">
             <label class="form-size-label me-1" for="size">Size:</label>
-            <input class="form-size-input me-3" type="number" min="0" max="300" name='size' id="size" style="width: 60px;">
+            <input class="form-size-input me-3" type="number" min="0" name='size' id="size" style="width: 60px;" required>
             <div class="form-check form-check-inline">
               <label class="form-check-label" for="modalWaterCheckbox" style="margin-top: 7px;">Water</label>
               <input class="form-check-input" type="checkbox" name='water' id="modalWaterCheckbox" style="margin-top: 7px;">
@@ -33,7 +33,7 @@
           <!-- Textarea for diary content -->
           <div class="form-group mt-3 w-100">
             <label for="modalDiaryContent">Diary Content</label>
-            <textarea class="form-control" name='content' id="modalDiaryContent" rows="5"></textarea>
+            <textarea class="form-control" placeholder='Write your diary here...' content' id="modalDiaryContent" rows="5" required></textarea>
           </div>
         </div>
       </div>

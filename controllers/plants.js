@@ -1,15 +1,12 @@
 
 const Plant = require('../models/plant');
 
-
 function index(req,res){
     res.redirect(`/${req.user.name.split(" ")[0]}`)
 }
 
 async function show(req,res){
-    
     res.render('plants/list')
-
 }
 
 async function create(req,res){
@@ -21,9 +18,7 @@ async function create(req,res){
     res.redirect(`/${req.user.name.split(" ")[0]}`)
 }
 
-
 async function crudOperations(req, res) {
-
     try {
         const action = req.body.action;
         if (action === 'fetch') {
@@ -31,7 +26,6 @@ async function crudOperations(req, res) {
             const userId = req.body.userId
             // Fetch all plants from the database
             const plants = await Plant.find({user:userId}).sort({date: -1 });
-
             // Send the fetched plants as JSON response
             res.json({ data: plants });
         } 
@@ -54,25 +48,20 @@ async function crudOperations(req, res) {
         }
         if (action === 'delete') {
             console.log(req.body.id);
-            const id = req.body.id;
-        
-            
+            const id = req.body.id;  
                 // Find the plant by its ID and delete it
                 const deletedPlant = await Plant.findByIdAndDelete(id);
         
                 // Check if the plant was found and deleted
                 if (!deletedPlant) {
                     return res.status(404).json({ error: 'Plant not found' });
-                }
-        
+                }      
                 // Check if the user is authorized to delete the plant
                 if (deletedPlant.user.toString() !== req.user._id.toString()) {
                     return res.status(403).json({ error: 'You are not authorized to delete this plant' });
-                }
-        
+                }    
                 // Send a success response
-                res.json({ message: 'Plant deleted successfully' });
-           
+                res.json({ message: 'Plant deleted successfully' });          
         }
         if (action === 'Edit') {     
                 // Extract data from the request body
@@ -89,8 +78,7 @@ async function crudOperations(req, res) {
                     // Add other fields as needed
                 };        
                 // Find the plant by its ID and update it with the new data
-                const updatedPlant = await Plant.findByIdAndUpdate(id, updatedData, { new: true });
-        
+                const updatedPlant = await Plant.findByIdAndUpdate(id, updatedData, { new: true });    
                 // // Check if the plant was found and updated
                 if (!updatedPlant) {
                     return res.status(404).json({ error: 'Plant not found' });

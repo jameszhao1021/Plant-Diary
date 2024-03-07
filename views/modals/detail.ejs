@@ -1,0 +1,55 @@
+<div class="modal fade" tabindex="1" id="action_modal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form method="post" id="sample_form">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Some Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Light</label>
+                        <select name="light" id="light" class="form-control" required>
+                            <option value='dark'>dark</option>
+                            <option value='dark-moderate'>dark-moderate</option>
+                            <option value='moderate'>moderate</option>
+                            <option value='moderate-bright'>moderate-bright</option>
+                            <option value='bright'>bright</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Water</label>
+                        <select name="water" id="water" class="form-control" required>
+                            <option value='low'>low</option>
+                            <option value='low-moderate'>low-moderate</option>
+                            <option value='moderate'>moderate</option>
+                            <option value='moderate-high'>moderate-high</option>
+                            <option value='high'>high</option>
+                            <option value='misting'>misting</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Soil</label>
+                        <select name="soil" id="soil" class="form-control" required>
+                            <option value='well-draining'>well-draining</option>
+                            <option value='moisture-retaining'>moisture-retaining</option>
+                            <option value='sandy'>sandy</option>
+                            <option value='mnone'>none</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id" id="id">
+                    <input type="hidden" name="plantId" id="plantId" value="<%= selectedPlant.id %>">
+
+                    <input type="hidden" name="action" id="action" value="Add">
+                    <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="action_button">Add Detials</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

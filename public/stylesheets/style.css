@@ -21,11 +21,11 @@ body {
 }
 
 .loginContainer{
-  
   height: 40vh;
   background-color: #fff;
   color: #000;
 }
+
 .containerHome{
   position:absolute;
   top:50%;
@@ -35,6 +35,7 @@ body {
 
 .introduction{
   font-size: 30px;
+  margin-top: 25px;
 }
 
 .introduction:last-child{
@@ -45,14 +46,15 @@ body {
 .card-subtitle{
   font-size: 20px;
 }
+
 .introPart{
   animation: slideDown 0.8s ease-out;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 .loginPart{
   animation: slideUp 0.8s ease-out;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 .googleIcon, .facebookIcon{
@@ -70,26 +72,23 @@ body {
 }
 
 .modal-body .img-thumbnail {
-  width: 150px; /* Set the desired width */
-  height: 80px; /* Set the desired height */
+  width: 150px; 
+  height: 80px; 
 }
 
 .modal-body.backgroundBody{
   overflow-y: auto;
   min-height: 200px;
-  max-height: 20vh; /* Adjust 200px to match your modal header and footer heights */
-}
-/* .container.mainList{
-  margin: 0;
-  width:2500px;
-} */
-.dataPart {
-  width: 20%; /* Set the width of each td to 20% (adjust as needed) */
-}
-.column-width {
-  width: 20%; /* Adjust the width as per your requirement */
+  max-height: 20vh; 
 }
 
+.dataPart {
+  width: 20%; 
+}
+
+.column-width {
+  width: 20%;
+}
 
 .editDateInput{
   padding-left:5px;
@@ -107,7 +106,6 @@ table{
   opacity: 0.9;
   font-size: 25px;
 }
-
 
 .navbar{
   opacity: 0.9;
@@ -187,18 +185,15 @@ footer{
   text-align: justify;
 }
 
-
 #plantTitle{
   font-family: "Abril Fatface", serif, Arial;
   font-weight: 600;
   font-style:normal;
   font-size: 60px;
-  color: #a5d5a5; /* Fill color */
+  color: #a5d5a5; 
   letter-spacing: 5px;
-  -webkit-text-stroke: 0.8px #000; /* For Chrome, Safari, Opera */
-  text-stroke: 0.8px #000; /* Standard syntax */
-    
-
+  -webkit-text-stroke: 0.8px #000; 
+  text-stroke: 0.8px #000; 
 }
 
 .container.mainList{
@@ -209,25 +204,23 @@ footer{
    margin-top:10px;
 }
 
-
 @keyframes slideDown {
   0% { opacity: 0;
-       transform: translateY(-80px);
+       transform: translateY(-90px);
      }
-  100% { opacity: 0.9;
+  100% { opacity: 0.85;
         transform: translateY(0);
       }
 }
 
 @keyframes slideUp {
   0% { opacity: 0;
-       transform: translateY(80px);
+       transform: translateY(90px);
      }
-  100% { opacity: 0.9;
+  100% { opacity: 0.85;
         transform: translateY(0);
       }
 }
-
 
 @media (max-width: 1200px) {
   .diaryData{
@@ -235,11 +228,17 @@ footer{
     
   }
 }
-@media (max-width: 770px) {
+@media (max-width: 780px) {
   .footerSubClass {
     width:50%;
   }
-
+  .introduction:first-child{
+    margin-top: 15px;
+   }
+   .introduction:last-child{
+    margin-top: -5px;
+    line-height: 1.4;
+   }
 }
 
 @media (max-width: 685px) {
@@ -256,10 +255,17 @@ footer{
    .loginPart{
     width: 150px;
    }
+   .introduction:first-child{
+    margin-top: 10px;
+   }
+   .introduction:last-child{
+    margin-top: -5px;
+    line-height: 1.2;
+   }
 }
 
+
 @media (max-width: 540px) {
- 
   .introPart{
    width: 250px;
   }
