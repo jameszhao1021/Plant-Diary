@@ -7,7 +7,7 @@ function index(req,res){
 }
 
 async function show(req,res){
-
+    
     res.render('plants/list')
 
 }
@@ -15,7 +15,7 @@ async function show(req,res){
 async function create(req,res){
  
     req.body.user = req.user._id;
-    
+    console.log(req.body.user)
     req.body.price = parseFloat(req.body.price);
     await Plant.create(req.body)
     res.redirect(`/${req.user.name.split(" ")[0]}`)
@@ -23,18 +23,20 @@ async function create(req,res){
 
 
 async function crudOperations(req, res) {
-  
+
     try {
         const action = req.body.action;
         if (action === 'fetch') {
-         
+            console.log('see the fetch body: ',req.body)
+            const userId = req.body.userId
             // Fetch all plants from the database
-            const plants = await Plant.find().sort({date: -1 });
+            const plants = await Plant.find({user:userId}).sort({date: -1 });
 
             // Send the fetched plants as JSON response
             res.json({ data: plants });
         } 
         if (action === 'Add'){
+            console.log(req.body)
              var name = req.body.name;
              var location = req.body.location;
              var price = req.body.price;
@@ -46,6 +48,7 @@ async function crudOperations(req, res) {
              const newPlant = new Plant({
                 name, location,price, date, user ,userName, userAvatar
              })
+             
              await newPlant.save();
              res.status(201).json({ message: 'Plant added successfully' });
         }

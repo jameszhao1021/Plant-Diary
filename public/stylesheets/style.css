@@ -17,6 +17,43 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
+}
+
+.loginContainer{
+  
+  height: 40vh;
+  background-color: #fff;
+  color: #000;
+}
+.containerHome{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+}
+.introduction{
+  font-size: 30px;
+}
+.introduction:last-child{
+  line-height: 2; 
+  font-size: 20px;
+}
+
+.introPart{
+  animation: slideDown 0.8s ease-out;
+  opacity: 0.9;
+}
+
+.loginPart{
+  animation: slideUp 0.8s ease-out;
+  opacity: 0.9;
+}
+
+.plantDiaryTitle{
+  font-family: "Abril Fatface", serif, Arial;
+  font-weight: 200;
+  font-style:italic;
 }
 
 .modal-body .img-thumbnail {
@@ -125,8 +162,7 @@ footer{
   flex-shrink: 0;
 }
 
-.footerSubClass{
-  
+.footerSubClass{ 
   width:30%;
   text-align: justify;
 }
@@ -153,6 +189,26 @@ footer{
    margin-top:10px;
 }
 
+
+@keyframes slideDown {
+  0% { opacity: 0;
+       transform: translateY(-80px);
+     }
+  100% { opacity: 0.9;
+        transform: translateY(0);
+      }
+}
+
+@keyframes slideUp {
+  0% { opacity: 0;
+       transform: translateY(80px);
+     }
+  100% { opacity: 0.9;
+        transform: translateY(0);
+      }
+}
+
+
 @media (max-width: 1200px) {
   .diaryData{
     width: 100%;
@@ -160,8 +216,6 @@ footer{
   }
 }
 @media (max-width: 770px) {
-  /* CSS rules to apply when window width is less than 770px */
-  /* For example, you can adjust font sizes, margins, padding, etc. */
   .footerSubClass {
     width:50%;
   }
@@ -169,8 +223,6 @@ footer{
 }
 
 @media (max-width: 685px) {
-  /* CSS rules to apply when window width is less than 770px */
-  /* For example, you can adjust font sizes, margins, padding, etc. */
    body{
     padding-left:20px;
     padding-right:20px;
@@ -178,11 +230,26 @@ footer{
    input[type="date"] {
     width:70px;
    }
+   .introPart{
+    width: 300px;
+   }
+   .loginPart{
+    width: 150px;
+   }
 }
 
+@media (max-width: 540px) {
+ 
+  .introPart{
+   width: 250px;
+  }
+  .loginPart{
+   width: 120px;
+  }
+}
+
+
 @media (max-width: 520px) {
-  /* CSS rules to apply when window width is less than 770px */
-  /* For example, you can adjust font sizes, margins, padding, etc. */
    body{
     padding-left:5px;
     padding-right:5px;
@@ -192,9 +259,23 @@ footer{
    }
 }
 
+@media (max-width: 500px) {
+  
+  .introPart{
+   display: none;
+  }
+ 
+
+}
+@media (max-width: 500px) {
+  
+  .loginPart{
+   width: 250px;
+  }
+ 
+
+}
 @media (max-width: 445px) {
-  /* CSS rules to apply when window width is less than 770px */
-  /* For example, you can adjust font sizes, margins, padding, etc. */
   footer {
     display: none;
 

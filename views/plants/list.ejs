@@ -61,7 +61,7 @@
                 </div> 
             </div>
             <div class="modal-footer">
-               <input type="hidden" name="id" id="id">
+               <input type="hidden" name="userId" id="userId" value='<%= user.id %>'>
                <input type="hidden" name="action" id="action" value="Add">
                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
                 <button type="submit" class="btn btn-primary" id="action_button">Add Plant</button>
@@ -106,10 +106,11 @@ $(document).ready(function(){
     });
 
     function load_data(){
+        const userId = $('#userId').val()
         $.ajax({
             url:'http://localhost:3000/<%= user.name.split(" ")[0] %>',
             method:'POST',
-            data:{action:'fetch'},
+            data:{action:'fetch', userId},
             dataType:'JSON',
             success:function(data){
                 let html = '';

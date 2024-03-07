@@ -1,18 +1,21 @@
 <div class="navbar navbar-dark bg-dark fixed-top">
     <div class="container">
-        <!-- Navbar content -->
         <ul class="navbar-nav flex-row me-auto mb-2 mb-md-0">
-
             <li class="nav-item" style="margin-right: 10px;">
-                <a class="nav-link" href='http://localhost:3000/<%= user.name.split(" ")[0] %>'>
+                <a class="nav-link me-2" href='http://localhost:3000/<%= user.name.split(" ")[0] %>'>
                     <img src='/images/plantIcon.png' width='18px' alt="plant">
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">Log Out</a>
+            <li class="nav-item me-2">
+                <a class="nav-link" href='http://localhost:3000/<%= user.name.split(" ")[0] %>'>Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#backgroundModal">Background</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log Out</a>
             </li>
         </ul>
     </div>

@@ -1,13 +1,59 @@
 <%- include('./partials/header') %>
-<p>Short introduction about this app</p>
-
-<!-- login/logout feature -->
-    <% if (user) { %>
-      <a href="/logout">LOG OUT</a>
-    <% } else { %>
-      <a href="/auth/google" class="login">LOG IN&nbsp;</a>
-    <% } %>
 
 
+<div class="containerHome d-flex flex-nowrap ">
+  <div class="row justify-content-center p-0 flex-nowrap">
+    <div class="p-0 m-0 introPart" style="max-width: 470px;">
+      <div class="card ">
+        <div class="card-body d-flex flex-column justify-content-evenly loginContainer">        
+          <p class="introduction">Welcome to Plant Diary!
+             
+           <p class="introduction"> Whether you're a seasoned gardener or just starting out, this app is designed to help you keep track of your plant collection and celebrate the beauty of nature.</p>
+        </div>
+      </div>
+    </div>
+    <div class="p-0 loginPart" style="max-width: 250px; min-width: 220px;">
+      <div class="card  max-width-card">
+        <div class="card-body d-flex flex-column justify-content-evenly loginContainer">        
+          <div class="d-flex justify-content-start align-items-center">
+            <h5 class="mb-0 plantDiaryTitle">Plant Diary</h5>
+            <img class='m-1' src="/images/greenIcon.png" width="30px" alt="plant">
+          </div>
+          <h6 class="card-subtitle">Log in to your account</h6>
+          <div class="d-flex flex-column">
+            <button class="btn border-dark btn-block googleLoginBtn" data-user="<%= user %>">
+              <img src="/images/googleIcon.png" alt="google" width="30px">
+              Google
+            </button>
+            <button class="btn border-dark btn-block facebookLoginBtn mt-2" data-user="<%= user %>">
+              <img src="/images/facebookIcon.png" alt="facebook" width="30px">
+              Facebook
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%- include('./partials/footer') %></input>
+
+</div>
+
+<script>
+ $('.googleLoginBtn').on('click', function(){
+  const user = $(this).data('user');
+ 
+      window.location.href ="/auth/google" 
+    
+ })
+
+ $('.facebookLoginBtn').on('click', function(){
+  const user = $(this).data('user');
+
+      window.location.href ="/auth/facebook" 
+    
+ })
+
+
+
+</script>

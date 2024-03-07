@@ -22,6 +22,19 @@ router.get('/oauth2callback', passport.authenticate(
   }
 ));
 
+router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
+
+router.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  successRedirect: '/user',
+  failureRedirect: '/',
+  failureFlash: true // Enable flash messages for error handling
+}));
+
+// Add an error handler middleware
+router.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send(`Something broke! Error: ${err.message}`);
+});
 // OAuth logout route
 router.get('/logout', function(req, res){
   req.logout(function() {
