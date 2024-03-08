@@ -23,10 +23,10 @@ async function crudOperations(req, res) {
             res.json({ data: detail });
         }
         if (action === 'Add') {
-            var light = req.body.light;
-            var water = req.body.water;
-            var soil = req.body.soil;
-            var plant = req.body.plantId;
+            const light = req.body.light;
+            const water = req.body.water;
+            const soil = req.body.soil;
+            const plant = req.body.plantId;
             const newDetail = new Detail({
                 light, water, soil, plant
             })
@@ -54,7 +54,7 @@ async function crudOperations(req, res) {
         if (action === 'Edit') {
             // Extract data from the request body
             const plantId = req.body.selectedPlantId;
-            const existingDetail = await Detail.findOne({plant:plantId})
+            const existingDetail = await Detail.findOne({plant:plantId});
             const updatedData = {
                 // Check if each field has been edited, if not, keep the existing value
                 light: req.body.light.length !== 0 ? req.body.light : existingDetail.light,
@@ -86,23 +86,22 @@ async function crudOperations(req, res) {
             res.json({ data: diaries });
         }
         if (action === 'Add') {
-            var date = req.body.date;
-            var size = req.body.size;
-            var water = req.body.water;
-            var mist = req.body.mist;
-            var fertilise = req.body.fertilise;
-            var content = req.body.content;
-            var plant = req.body.plantId;
+            const date = req.body.date;
+            const size = req.body.size;
+            const water = req.body.water;
+            const mist = req.body.mist;
+            const fertilise = req.body.fertilise;
+            const content = req.body.content;
+            const plant = req.body.plantId;
             const waterValue = water === 'on' ? true : false;
             const mistValue = mist === 'on' ? true : false;
             const fertiliseValue = fertilise === 'on' ? true : false;
             const newDiary = new Diary({
-                date, size, light, water: waterValue, mist:mistValue, fertilise:fertiliseValue, content, plant
+                date, size, water: waterValue, mist:mistValue, fertilise:fertiliseValue, content, plant
             })
             await newDiary.save();
             res.status(201).json({ message: 'Diary added successfully' });
         }
-
         if (action === 'delete') {         
             const id = req.body.id;       
                 // Find the plant by its ID and delete it

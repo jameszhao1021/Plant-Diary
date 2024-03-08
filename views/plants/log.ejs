@@ -22,10 +22,10 @@
                     <img src='/images/editIcon.png' width='20px' alt="edit">
                 </button>
                 <button type="button" class="btn btn-sm cancelButton float-end" style="display: none;">
-                    <img src='/images/cancelIcon.jpeg' width='30px' alt="cancel">
+                    <img src='/images/cancelIcon.jpeg' width='20px' alt="cancel">
                 </button>
                 <button type="button" class="btn  btn-sm saveButton float-end" style="display: none;">
-                    <img src='/images/confirmIcon.jpeg' width='30px' alt="confirm">
+                    <img src='/images/confirmIcon.jpeg' width='20px' alt="confirm">
                 </button>
                 <table class='table' id='sample_data'>
                     <thead class='thead-dark'>
@@ -70,7 +70,6 @@
 
 <script>
     $(document).ready(function () {
-
         load_data();
         loadDiary();
         // Load selected background image from Local Storage and apply it
@@ -91,7 +90,6 @@
 
         function load_data() {
             const selectedPlantId = '<%= selectedPlant.id %>';
-
             $.ajax({
                 url: `/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
                 method: 'POST',
@@ -111,7 +109,6 @@
                                             <option value='moderate-bright'>moderate-bright</option>
                                             <option value='bright'>bright</option>                       
                                             </select>
-
                                     </td>
                                 <td class="align-middle dataPart listTd" >
                                 <span class="dataSpan">${data.data[count].water}</span>
@@ -208,8 +205,6 @@
         //Edit 
 
         $(document).on('click', '#edit_data', function () {
-
-
             $('#detailRow').find('.align-middle').attr('contenteditable', true);
             // Show the input field and hide the span element
             $('#detailRow').find('.editDateInput').each(function () {
@@ -232,16 +227,13 @@
         });
 
         $(document).on('click', '.saveButton', function () {
-
             const selectedPlantId = '<%= selectedPlant.id %>';
-
             // Gather updated data from input fields
             let updatedData = {
                 light: $('#detailRow').find('.editDateInput').eq(0).val(),
                 water: $('#detailRow').find('.editDateInput').eq(1).val(),
                 soil: $('#detailRow').find('.editDateInput').eq(2).val(),
             };
-
             // Send AJAX request to update data
             $.ajax({
                 url: `/<%= user.name.split(" ")[0] %>/${selectedPlantId}`,
@@ -264,7 +256,6 @@
                     $('#detailRow').find('.align-middle').removeAttr('contenteditable');
                     $('#delete_data, #edit_data').show();
                     $('.saveButton, .cancelButton').hide();
-
                 },
             });
         });
@@ -287,8 +278,7 @@
                                     <div class=' mb-3 border rounded shadow border-dark p-3 diaryData' style="height: 300px;">                                   
                                         <div class='form-group row flex-row mb-0 me-3 diaryDataInput'>
                                             <div class='d-flex align-items-center'>
-                                            <label class='me-1'>Date:</label>
-                                            
+                                            <label class='me-1'>Date:</label>                                           
                                                 <span class='dataSpan'>${formatDate(data.data[count].date)}</span>
                                                 <input type='date' class='form-control editDateInput dateInput' name='date' style='display: none; max-width: 150px'>
                                             </div>
@@ -301,16 +291,13 @@
                                                         <input type='number' min='0' max='300' placeholder='${data.data[count].size}' class='form-control editDateInput' name='size' style='display: none; max-width: 45px'>
                                                     </div>
                                                 </div>
-
                                                 <div class='form-check-inline diaryDataInput'>
                                                     <div class='d-flex align-items-center'>
                                                         <label class='form-check-label me-1'>Water:</label>
                                                         <div class='flex-grow-1'> 
                                                             <span class='dataSpan'>${data.data[count].water ? '<img src="/images/yesIcon.png" alt="yes" width="25px">' : '<img src="/images/noIcon.png" alt="no" width="30px">'}</span>
-                                                        </div>
-                                                
-                                                            <input class='form-check-input editDateInput dateInput' type='checkbox' id='waterCheckbox'  name='water' style='display: none;max-width: 50px'>                                           
-                                                        
+                                                        </div>                                              
+                                                            <input class='form-check-input editDateInput dateInput' type='checkbox' id='waterCheckbox'  name='water' style='display: none;max-width: 50px'>                                                                                              
                                                     </div>
                                                 </div>
                                                 <div class='form-check-inline diaryDataInput'> 
@@ -320,8 +307,7 @@
                                                             <span class='dataSpan'>${data.data[count].mist ? '<img src="/images/yesIcon.png" alt="yes" width="25px">' : '<img src="/images/noIcon.png" alt="no" width="30px">'}</span>
                                                         </div>
                                                        
-                                                            <input class='form-check-input editDateInput dateInput' type='checkbox' id='mistCheckbox' name='mist' style='display: none;max-width: 50px'>
-                                                        
+                                                            <input class='form-check-input editDateInput dateInput' type='checkbox' id='mistCheckbox' name='mist' style='display: none;max-width: 50px'>                                                       
                                                     </div>
                                                 </div>
                                                 <div class='form-check-inline diaryDataInput'>   
@@ -329,36 +315,32 @@
                                                         <label class='form-check-label me-1'>Fertilise:</label>
                                                         <div class='flex-grow-1'>
                                                             <span class='dataSpan'>${data.data[count].fertilise ? '<img src="/images/yesIcon.png" alt="yes" width="25px">' : '<img src="/images/noIcon.png" alt="no" width="30px">'}</span>
-                                                        </div>
-                                                       
-                                                            <input class="form-check-input editDateInput dateInput" type="checkbox" id="fertiliseCheckbox" name='fertilise' style="display: none; max-width: 50px">
-                                                        
+                                                        </div>                                       
+                                                            <input class="form-check-input editDateInput dateInput" type="checkbox" id="fertiliseCheckbox" name='fertilise' style="display: none; max-width: 50px">                                                       
                                                     </div>
                                                 </div>
                                             </div>
-                                 
+                                        <div class='form-group mt-3 diaryDataInput' style='height: 130px;'>
+                                                <label>Note:</label>
+                                                <br>
+                                                <div class='dataSpan'>
+                                                    <span d-block h-100'>${data.data[count].content}</span>
+                                                </div>
+                                                <textarea class='form-control editDateInput dateInput' id='diaryContent' rows='3' name='content' style='display: none;'></textarea>
+                                                </div>
 
-                                    <div class='form-group mt-3 diaryDataInput' style='height: 130px;'>
-                                            <label>Note:</label>
-                                            <br>
-                                            <div class='dataSpan'>
-                                                <span d-block h-100'>${data.data[count].content}</span>
-                                            </div>
-                                            <textarea class='form-control editDateInput dateInput' id='diaryContent' rows='3' name='content' style='display: none;'></textarea>
-                                        </div>
-
-                                        <button type='button' class='btn editButton ' data-item-id='${data.data[count]._id}'>
-                                            <img src='/images/editIcon.png' width='20px' alt='delete'>
-                                        </button>
-                                        <button type='button' class='btn deleteButton' data-bs-toggle='modal' data-bs-target='#diaryDeleteModal' data-item-id='${data.data[count]._id}'>
-                                            <img src='/images/deleteIcon.png' width='20px' alt='delete' style='margin-left:-15px'>
-                                        </button>
-                                    <button type='button' class='btn  diarySaveButton' style='display: none; '>
-                                            <img src='/images/confirmIcon.jpeg' width='20px' alt='confirm' style='margin-top:-10px'>
-                                        </button>
-                                        <button type='button' class='btn diaryCancelButton' style='display: none;'>
-                                            <img src='/images/cancelIcon.jpeg' width='20px' alt='cancel' style='margin-left:-15px; margin-top:-10px'>
-                                        </button>
+                                                <button type='button' class='btn p-0 editButton ' data-item-id='${data.data[count]._id}'>
+                                                    <img src='/images/editIcon.png' width='20px' alt='delete'>
+                                                </button>
+                                                <button type='button' class='btn p-0 deleteButton' data-bs-toggle='modal' data-bs-target='#diaryDeleteModal' data-item-id='${data.data[count]._id}' style='margin-left:5px'>
+                                                    <img src='/images/deleteIcon.png' width='20px' alt='delete' >
+                                                </button>
+                                                <button type='button' class='btn p-0  diarySaveButton' style='display: none;  margin-top:-10px'>
+                                                    <img src='/images/confirmIcon.jpeg' width='20px' alt='confirm'>
+                                                </button>
+                                                <button type='button' class='btn p-0 diaryCancelButton' style='display: none;  margin-top:-10px'>
+                                                    <img src='/images/cancelIcon.jpeg' width='20px' alt='cancel' style='margin-left:5px;'>
+                                                </button>
                                         </div>
                                     `;
 
@@ -376,14 +358,11 @@
 
         $('#addDiaryBtn').click(function () {
             $('#diaryForm')[0].reset();
-            $('#action').val('Add');
-
         });
 
         $('#diaryForm').on('submit', function (e) {
             const selectedPlantId = '<%= selectedPlant.id %>';
             e.preventDefault();
-
             let formData = $('#diaryForm').serialize();
             formData += '&part=diary';
             $.ajax({
@@ -428,73 +407,62 @@
     });
     })
     
-
 $(document).on('click', '.editButton', function() {
         let id = $(this).data('item-id')
         $('.diarySaveButton').data('item-id', id);
         let diaryData = $(this).closest('.diaryData');
-
-        
         diaryData.find('.dataSpan').each(function() {
         $(this).data('original-value', $(this).val());
     });
     let originalValue = diaryData.find('.dataSpan').data('original-value');
-    console.log('see originnal: '+originalValue);
         // Show the input field and hide the span element
-        
         diaryData.find('.editDateInput').each(function() {
             let currentValue = $(this).closest('.dataSpan').val(); // Get the current value
             $(this).val(''); // Clear any previously typed value
             $(this).attr('placeholder', currentValue); // Set the placeholder to the current value
         });
-       
         diaryData.find('.editDateInput').show();
         diaryData.find('.dataSpan').hide();
         diaryData.find('.editButton, .deleteButton').hide();
         diaryData.find('.diarySaveButton, .diaryCancelButton').show();
-
     });
     $(document).on('click', '.editButton', function() {
-    let id = $(this).data('item-id');
-    $('.saveButton').data('item-id', id);
-    let diaryData = $(this).closest('.diaryData');
+        let id = $(this).data('item-id');
+        $('.saveButton').data('item-id', id);
+        let diaryData = $(this).closest('.diaryData');
 
-    // Show the input field and hide the span element
-    diaryData.find('.editDateInput').each(function() {
-        let currentValue;
-        if ($(this).is('input[type="checkbox"]')) {
-            // For checkboxes, check or uncheck based on the value
-            currentValue = $(this).closest('.diaryDataInput').find('.dataSpan').find('img').attr('alt') == 'yes';
-
-          
-            $(this).prop('checked', currentValue);
-        } else if ($(this).is('input[type="number"]')) {
-            // For number inputs, show the current value and set up arrow click event
-            currentValue = parseInt($(this).closest('.diaryDataInput').find('.dataSpan').text().trim());
-            $(this).val(currentValue);
-            $(this).on('input', function() {
-                if (isNaN(parseInt($(this).val()))) {
-                    $(this).val(currentValue);
-                } else {
-                    currentValue = parseInt($(this).val());
-                }
-            });
-        }  else if ($(this).is('textarea')){
-            // For other input types, show the current value
-            currentValue = $(this).closest('.diaryDataInput').find('.dataSpan').text().trim();
-            $(this).val(currentValue);
-        }
+        // Show the input field and hide the span element
+        diaryData.find('.editDateInput').each(function() {
+            let currentValue;
+            if ($(this).is('input[type="checkbox"]')) {
+                // For checkboxes, check or uncheck based on the value
+                currentValue = $(this).closest('.diaryDataInput').find('.dataSpan').find('img').attr('alt') == 'yes';
+                $(this).prop('checked', currentValue);
+            } else if ($(this).is('input[type="number"]')) {
+                // For number inputs, show the current value and set up arrow click event
+                currentValue = parseInt($(this).closest('.diaryDataInput').find('.dataSpan').text().trim());
+                $(this).val(currentValue);
+                $(this).on('input', function() {
+                    if (isNaN(parseInt($(this).val()))) {
+                        $(this).val(currentValue);
+                    } else {
+                        currentValue = parseInt($(this).val());
+                    }
+                });
+            }  else if ($(this).is('textarea')){
+                // For other input types, show the current value
+                currentValue = $(this).closest('.diaryDataInput').find('.dataSpan').text().trim();
+                $(this).val(currentValue);
+            }
+        });
+        diaryData.find('.editDateInput').show();
+        diaryData.find('.dataSpan').hide();
+        diaryData.find('.editButton, .deleteButton').hide();
+        diaryData.find('.diarySaveButton, .diaryCancelButton').show();
     });
-
-    diaryData.find('.editDateInput').show();
-    diaryData.find('.dataSpan').hide();
-    diaryData.find('.editButton, .deleteButton').hide();
-    diaryData.find('.diarySaveButton, .diaryCancelButton').show();
-});
 
         $(document).on('click', '.diaryCancelButton', function() {
             let diaryData = $(this).closest('.diaryData');
-
             // Revert to original values
             diaryData.find('.editDateInput').hide();
             diaryData.find('.dataSpan').show(); 
@@ -503,23 +471,21 @@ $(document).on('click', '.editButton', function() {
         });
 
         $(document).on('click', '.diarySaveButton', function() {
-         const selectedPlantId = '<%= selectedPlant.id %>';
-        let id = $(this).data('item-id');
-        console.log('the id is: '+id)
-        let diaryData = $(this).closest('.diaryData');
-        
-       const  waterValue = diaryData.find('.editDateInput').eq(2).prop('checked') ? true : false;
-       const  mistValue = diaryData.find('.editDateInput').eq(3).prop('checked') ? true : false;
-       const  fertiliseValue = diaryData.find('.editDateInput').eq(4).prop('checked') ? true : false;
-        // Gather updated data from input fields
-        let updatedData = {
-            date: diaryData.find('.editDateInput').eq(0).val(),
-            size: diaryData.find('.editDateInput').eq(1).val(),
-            water: waterValue,
-            mist: mistValue,
-            fertilise: fertiliseValue,
-            content: diaryData.find('.editDateInput').eq(5).val(),
-        };
+            const selectedPlantId = '<%= selectedPlant.id %>';
+            const id = $(this).data('item-id');
+            const diaryData = $(this).closest('.diaryData');            
+            const waterValue = diaryData.find('.editDateInput').eq(2).prop('checked') ? true : false;
+            const mistValue = diaryData.find('.editDateInput').eq(3).prop('checked') ? true : false;
+            const fertiliseValue = diaryData.find('.editDateInput').eq(4).prop('checked') ? true : false;
+            // Gather updated data from input fields
+            const updatedData = {
+                date: diaryData.find('.editDateInput').eq(0).val(),
+                size: diaryData.find('.editDateInput').eq(1).val(),
+                water: waterValue,
+                mist: mistValue,
+                fertilise: fertiliseValue,
+                content: diaryData.find('.editDateInput').eq(5).val(),
+            };
             
         // Send AJAX request to update data
         $.ajax({

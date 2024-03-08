@@ -1,9 +1,9 @@
 <%- include('../partials/header') %>
 <%- include('../partials/navbar') %>
 
-  <div class='container mainList' >
-    <div class='row justify-content-center' >
-        <div class='col-lg-20' >
+<div class='container mainList'>
+    <div class='row justify-content-center'>
+        <div class='col-lg-20'>
             <button type='button' id='add_data' class='btn btn-sm float-end'>
                 <img src='/images/addIcon.png' width='30px' alt='add'>
             </button>          
@@ -113,16 +113,65 @@ $(document).ready(function(){
             }
         })
     }
+    
+    // Add data
+    $('#add_data').click(function(){
+        $('#sample_form')[0].reset();
+        $('#action').val('Add');
+        $('#action_button').text('Add');  
+        $('#action_modal').modal('show');
+    }); 
+
+    $('#sample_form').on('submit', function(e){
+        e.preventDefault();
+        console.log($('#sample_form').serialize());
+
+        $.ajax({
+        url:'http://localhost:3000/<%= user.name.split(" ")[0] %>',
+        method:'POST',
+        data:$('#sample_form').serialize(),
+        dataType:'JSON',
+        beforeSend: function(){
+                $('#action_button').attr('disabled','disabled')
+            },
+        success:function(data){
+                $('#action_button').attr('disabled',false);
+                $('#action_modal').modal('hide'); 
+                load_data();
+            }
+        })
+    })
+    
+    //Delete data
+    $(document).on('click', '.deleteButton', function() {
+        let id = $(this).data('item-id'); // Extract item ID from the delete button that triggered the modal
+    $('#confirmDelete').data('item-id', id); // Set the item ID in the confirmDelete button's data attribute
+    });
+
+    $('#confirmDelete').on('click', function(){
+        let id = $(this).data('item-id'); // Extract item ID from the button's data attribute
+    // Perform AJAX request to delete the item
+        console.log('this is the id:  '+id)
+    $.ajax({
+        url:'http://localhost:3000/<%= user.name.split(" ")[0] %>',
+        method: 'POST',
+        data: { action: 'delete', id: id },
+        dataType: 'json',
+        success: function(response) {
+                load_data()
+              },  
+         });
+    })
 
     //Edit plant
     $(document).on('click', '.editButton', function() {
-        let id = $(this).data('item-id')
+        const id = $(this).data('item-id')
         $('.saveButton').data('item-id', id);
-        let row = $(this).closest('tr');
+        const row = $(this).closest('tr');
         row.find('.align-middle').attr('contenteditable', true);
         // Show the input field and hide the span element
         row.find('.editDateInput').each(function() {
-            let currentValue = $(this).closest('.dataPart').text().trim(); // Get the current value
+            const currentValue = $(this).closest('.dataPart').text().trim(); // Get the current value
             $(this).val(''); // Clear any previously typed value
             $(this).attr('placeholder', currentValue); // Set the placeholder to the current value
         });
@@ -134,7 +183,7 @@ $(document).ready(function(){
     });
 
     $(document).on('click', '.cancelButton', function() {
-        let row = $(this).closest('tr');
+        const row = $(this).closest('tr');
         // Revert to original values
         row.find('.editDateInput').hide();
         row.find('.dateSpan').show(); 
@@ -144,12 +193,11 @@ $(document).ready(function(){
     });
 
     $(document).on('click', '.saveButton', function() {
-        
-    let id = $(this).data('item-id');
-    let row = $(this).closest('tr');
+    const id = $(this).data('item-id');
+    const row = $(this).closest('tr');
        
     // Gather updated data from input fields
-    let updatedData = {
+    const updatedData = {
         name: row.find('.editDateInput').eq(0).val(),
         location: row.find('.editDateInput').eq(1).val(),
         price: row.find('.editDateInput').eq(2).val(),
@@ -186,57 +234,6 @@ $(document).ready(function(){
         let itemId = $(this).data('item-id');
         window.location.href = `/<%= user.name.split(" ")[0] %>/${itemId}`;     
     });
-
-// add data
-
-    $('#add_data').click(function(){
-            $('#sample_form')[0].reset();
-            $('#action').val('Add');
-            $('#action_button').text('Add');  
-            $('#action_modal').modal('show');
-        }); 
-
-    $('#sample_form').on('submit', function(e){
-            e.preventDefault();
-            console.log($('#sample_form').serialize());
-
-            $.ajax({
-            url:'http://localhost:3000/<%= user.name.split(" ")[0] %>',
-            method:'POST',
-            data:$('#sample_form').serialize(),
-            
-            dataType:'JSON',
-            beforeSend: function(){
-                $('#action_button').attr('disabled','disabled')
-            },
-            success:function(data){
-                $('#action_button').attr('disabled',false);
-                $('#action_modal').modal('hide'); 
-                load_data();
-            }
-        })
-    })
-
-        //Pass the id of item to the comfirm delete button in the modal
-        $(document).on('click', '.deleteButton', function() {
-            let id = $(this).data('item-id'); // Extract item ID from the delete button that triggered the modal
-        $('#confirmDelete').data('item-id', id); // Set the item ID in the confirmDelete button's data attribute
-        });
-
-        $('#confirmDelete').on('click', function(){
-            let id = $(this).data('item-id'); // Extract item ID from the button's data attribute
-        // Perform AJAX request to delete the item
-            console.log('this is the id:  '+id)
-        $.ajax({
-            url:'http://localhost:3000/<%= user.name.split(" ")[0] %>',
-            method: 'POST',
-            data: { action: 'delete', id: id },
-            dataType: 'json',
-            success: function(response) {
-                    load_data()
-            },  
-        });
-    })
 });
 
 </script>
