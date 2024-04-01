@@ -3,12 +3,14 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const User = require('../models/user');
 
+const callbackURL = process.env.NODE_ENV === 'production' ? process.env.GOOGLE_CALLBACK_PROD : process.env.GOOGLE_CALLBACK;
+
 passport.use(new GoogleStrategy(
     // Configuration object
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: process.env.GOOGLE_CALLBACK
+      callbackURL: callbackURL
     },
     // The verify callback function
 
