@@ -37,6 +37,9 @@
 <%- include('../modals/listDelete') %>
 
 <script>
+    var userName = '<%= user.name.split(" ")[0] %>';
+   var baseUrl = window.location.protocol + '//' + window.location.host;
+
 $(document).ready(function(){
     load_data();
     const selectedBackground = localStorage.getItem('selectedBackground');
@@ -54,7 +57,7 @@ $(document).ready(function(){
     function load_data(){
         const userId = $('#userId').val()
         $.ajax({
-            url:'http://localhost:3000/<%= user.name.split(" ")[0] %>',
+            url:baseUrl + '/' + userName,
             method:'POST',
             data:{action:'fetch', userId},
             dataType:'JSON',
@@ -127,7 +130,7 @@ $(document).ready(function(){
         console.log($('#sample_form').serialize());
 
         $.ajax({
-        url:'http://localhost:3000/<%= user.name.split(" ")[0] %>',
+        url:baseUrl + '/' + userName,
         method:'POST',
         data:$('#sample_form').serialize(),
         dataType:'JSON',
@@ -153,7 +156,7 @@ $(document).ready(function(){
     // Perform AJAX request to delete the item
         console.log('this is the id:  '+id)
     $.ajax({
-        url:'http://localhost:3000/<%= user.name.split(" ")[0] %>',
+        url:baseUrl + '/' + userName,
         method: 'POST',
         data: { action: 'delete', id: id },
         dataType: 'json',
@@ -206,7 +209,7 @@ $(document).ready(function(){
         
     // Send AJAX request to update data
     $.ajax({
-        url: 'http://localhost:3000/<%= user.name.split(" ")[0] %>',
+        url: baseUrl + '/' + userName,
         method: 'POST',
         data: {
             action: 'Edit',
